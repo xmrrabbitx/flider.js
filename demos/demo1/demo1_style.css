@@ -1,0 +1,18 @@
+body{
+    background: rgb(49, 49, 49);
+}
+
+#slider{
+   height:600px;
+   background-color: rgb(181, 132, 132);;
+   
+}
+
+
+@media only screen and (max-width: 574px) {
+#slider{
+
+    height: 200px;;
+}
+
+}
