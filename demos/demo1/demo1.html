@@ -15,90 +15,84 @@
 
         <link  rel="stylesheet" href="demo1_style.css">
 
+
+        <script type="text/javascript" src="../../flider.js" >
+        </script>
+
+
+
+        
+
 <style>
 
 </style>
 
 
-    </head>
-    <body>
+</head>
+
+<body>
 
 
-        <div class="container-fluid">
-            <div class="row">
-                &#129084;
+    <div class="container-fluid">
 
-<div id="slider" class="slider col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0" >
-    
+        <div class="row">
+            <div class="col-xl-12 mt-5 text-center"><h1>Demo number 1:  Centered Slider </h1></div>
+
+            <div id="flider" class="col-xl-12 mt-5 col-lg-12 col-md-12 col-sm-12 col-12 p-0" >
+                
  
-</div>
+            </div>
 
+        </div>
 
-<div style="color:white;" class="col-xl-12">right</div>
-
-
-
-</div>
-</div>
+    </div>
 
 
 
 
-
-<script type="text/javascript">
-
-</script>
-
-
-
-<script type="text/javascript" src="../../flider.js" >
-</script>
 
 
 <script type="text/javascript" >
 
 
 
+    /* Load main function  */
+    fliderjs( {
 
-/* Load main function  */
-main( {
+        area:[1000,500], /* container option ( string:"full" or array:[x%,y%] )  */
+        id: "flider", /* parent element option  */
+        pics:["1.jpg","2.jpg","3.jpg","4.jpg"], /*  names of the pictures you want to put  */
+        src_pics:"pics/", /*  src_pics is the path to your pictures ex: pics/  */
+        duration : 2000, /* in milliseconds */
+        infinite:true, /*  true or false , default is true */
+        slideToshow:1, /* numbers of slide you want to show */
+        auto:true, /* true , false  */
+        auto_delay:2000, /* in milliseconds */
+        auto_duration : 3000, /* in milliseconds */
+        auto_direction:"right", /* "left" direction or "right" direction */
 
-area:[1000,500], /* container option ( string:"full" or array:[x%,y%] )  */
-id: "slider", /* parent element option  */
-pics:["10.jpg","11.jpg","12.jpg","13.jpg"], /*  names of the pictures you want to put  */
-src_pics:"pics/", /*  src_pics is the path to your pictures ex: pics/  */
-duration : 2000, /* in milliseconds */
-infinite:true, /*  true or false , default is true */
-slideToshow:1, /* numbers of slide you want to show */
-auto:true, /* true , false  */
-auto_delay:2000, /* in milliseconds */
-auto_duration : 3000, /* in milliseconds */
-auto_direction:"right", /* "left" direction or "right" direction */
+        optional:{
+            
+                    arrows:true,/* true , false , "hover", "pale" */
 
-optional:{
-    
-    arrows:true,/* true , false , "hover", "pale" */
-   
-    css:{"arrow-left":{"background":"","border-radius":"8px","margin-left":"20px","padding":"1% 1%"},
-         "arrow-right":{"border-radius":"8px","margin-right":"20px","padding":"1% 1%"},
-         "slider_container":{"border-radius":"0px"},
-         "slides_0":{"object-fit":"cover"}, /* all pictures start with 'slides_' and '0' is the begining of pic numbers  */
-         "slides_1":{"object-fit":"cover"},
-         "slides_2":{"object-fit":"cover"},
-         "slides_3":{"object-fit":"cover"}
-         
-        }
-    
+                    css:{"arrow-left":{"background":"","border-radius":"8px","margin-left":"20px","padding":"1% 1%"},
+                        "arrow-right":{"border-radius":"8px","margin-right":"20px","padding":"1% 1%"},
+                        "slider_container":{"border-radius":"0px"},
+                        "slides_0":{"object-fit":"cover"}, /* all pictures start with 'slides_' and '0' is the begining of pic numbers  */
+                        "slides_1":{"object-fit":"cover"},
+                        "slides_2":{"object-fit":"cover"},
+                        "slides_3":{"object-fit":"cover"}
+                        
+                        }
+                    
 
-}
-
-
-});
-
-
+                }
+    });
 
 
 </script>
 
-    </body>
+
+
+</body>
 </html>

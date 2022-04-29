@@ -51,13 +51,14 @@ var err = new errHdl();
 function eventHndl(){};
 
 eventHndl.prototype.Handler = function(p){
-
+    
     var slideWidth = p['slidewidth'];
     var slideToshow = p['slideToshow'];
     var slideCount = $('#slider_container ul li').length;
     var sliderUlWidth = slideCount * (slideWidth / slideToshow);
     var mode = p['mode'];
     var auto = p['auto'];
+    var Duration = p['duration'];
     var autoDirection = p['autoDirection'];
     var autoDelay = p['autoDelay'];
     var autoDuration = p['autoDuration'];
@@ -120,7 +121,9 @@ eventHndl.prototype.Handler = function(p){
 
                                 }
 
-                                AnimateEvent(this.id,clickMode,auto);
+                                let duration = Duration;
+
+                                AnimateEvent(this.id,clickMode,auto,duration);
 
 
                         });
@@ -137,11 +140,11 @@ eventHndl.prototype.Handler = function(p){
                 // Auto Event
                 function AutoEvent (){ timer = setInterval(function () {
                   
-                  
+                       let duration = autoDuration;
                         
-                       AnimateEvent(autoDirection,"disable click",true)
+                       AnimateEvent(autoDirection,"disable click",true,duration)
 
-                
+                        
 
                 }, autoDelay + autoDuration );
 
@@ -154,7 +157,7 @@ eventHndl.prototype.Handler = function(p){
 
 
                 // Animate Event
-                function AnimateEvent(arrowId,clickMode,auto){
+                function AnimateEvent(arrowId,clickMode,auto,duration){
 
                    
                     var anim = {
@@ -169,8 +172,8 @@ eventHndl.prototype.Handler = function(p){
 
                         };
 
-
-                    $('#slider_container ul').animate(anim[auto][mode][arrowId],autoDuration,function(){
+                 
+                    $('#slider_container ul').animate(anim[auto][mode][arrowId],duration,function(){
 
                         if(mode !== true){
 
@@ -178,7 +181,7 @@ eventHndl.prototype.Handler = function(p){
                             
                         }else{
                             
-                          
+                            console.log(Duration);
 
                             if(arrowId === "arrow-right" || arrowId === "right"){
                                 $('#slider_container ul li:last-child').prependTo('#slider_container ul');
@@ -225,14 +228,20 @@ function styleCss (){};
 // main styles
 styleCss.prototype.Css = function(optional){
 
-let optionalCss = optional['css'];
+    if(optional !== null){
+        let optionalCss = optional['css'];
 
-for(x=0;x<Object.keys(optionalCss).length;x++){
+        if(optional['css'] !== null && optional['css'] !== "" && optional['css'] !== undefined){
 
-    
-    $("#" + Object.keys(optionalCss)[x]).css(optionalCss[Object.keys(optionalCss)[x]]);
-    
-   
+            for(x=0;x<Object.keys(optionalCss).length;x++){
+
+                
+                $("#" + Object.keys(optionalCss)[x]).css(optionalCss[Object.keys(optionalCss)[x]]);
+                
+            
+                }
+
+        }
     }
 
 }
@@ -241,49 +250,52 @@ for(x=0;x<Object.keys(optionalCss).length;x++){
 // arrows styles modes
 styleCss.prototype.Arrows = function(optional){
 
-    
-    if(optional['arrows'] === false){
-        $("#arrow-right").css("display","none");
-        $("#arrow-left").css("display","none");
+    if(optional !== null){
+        
+            if(optional['arrows'] === false){
+                $("#arrow-right").css("display","none");
+                $("#arrow-left").css("display","none");
 
-    } else if (optional['arrows']  === "hover"){
+            } else if (optional['arrows']  === "hover"){
 
-        $("#arrow-right").css("display","none");
-        $("#arrow-left").css("display","none");
+                $("#arrow-right").css("display","none");
+                $("#arrow-left").css("display","none");
 
-        $("#slider_container").on("mouseover",fadeIn).on("mouseenter",fadeIn).on("click",fadeIn).on("mouseleave", fadeOut);
+                $("#slider_container").on("mouseover",fadeIn).on("mouseenter",fadeIn).on("click",fadeIn).on("mouseleave", fadeOut);
 
 
 
-    } else if (optional['arrows']  === "pale"){
+            } else if (optional['arrows']  === "pale"){
 
-        $("#arrow-right").css("opacity",0.5);
-        $("#arrow-left").css("opacity",0.5);
-        $("#slider_container").on("mouseover",paleOn).on("mouseenter",paleOn).on("click",paleOn).on("mouseleave", paleOff);
+                $("#arrow-right").css("opacity",0.5);
+                $("#arrow-left").css("opacity",0.5);
+                $("#slider_container").on("mouseover",paleOn).on("mouseenter",paleOn).on("click",paleOn).on("mouseleave", paleOff);
+
+            }
+
+            function fadeIn(){
+                $("#arrow-right").fadeIn(500)
+                $("#arrow-left").fadeIn(500)
+
+            }
+        function fadeOut(){
+                $("#arrow-right").fadeOut(500)
+                $("#arrow-left").fadeOut(500)
+        }
+        function paleOn(){
+
+            $("#arrow-right").css("opacity",1);
+            $("#arrow-left").css("opacity",1);
+
+        }
+        function paleOff(){
+
+            $("#arrow-right").css("opacity",0.5);
+            $("#arrow-left").css("opacity",0.5);
+
+        }
 
     }
-
-    function fadeIn(){
-        $("#arrow-right").fadeIn(500)
-        $("#arrow-left").fadeIn(500)
-
-    }
-   function fadeOut(){
-        $("#arrow-right").fadeOut(500)
-        $("#arrow-left").fadeOut(500)
-   }
-   function paleOn(){
-
-    $("#arrow-right").css("opacity",1);
-    $("#arrow-left").css("opacity",1);
-
-   }
-   function paleOff(){
-
-    $("#arrow-right").css("opacity",0.5);
-    $("#arrow-left").css("opacity",0.5);
-
-}
 
 
 }
@@ -333,7 +345,6 @@ variables.prototype.containerCreate = function(){
 	parentElement.appendChild(this.containerBlock);
 
        /* main variable for container */
-	var parentElementId = this.var['container']['id'];
 	var parentElement = document.getElementById(this.var['container']['id']);
  
 
@@ -380,11 +391,15 @@ variables.prototype.slideTrailsCreate =  function(){
     this.contb = document.getElementById("slider_container");
 
     this.arrowleft = document.createElement("button");
-    this.arrowleft.appendChild(document.createTextNode("❮"));
+    this.icarrLeft = document.createElement("span");
+    this.icarrLeft.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1.1em" height="1.1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="M685.248 104.704a64 64 0 0 1 0 90.496L368.448 512l316.8 316.8a64 64 0 0 1-90.496 90.496L232.704 557.248a64 64 0 0 1 0-90.496l362.048-362.048a64 64 0 0 1 90.496 0z"/></svg>';
+    this.arrowleft.appendChild(this.icarrLeft);
     this.arrowleft.setAttribute("id","arrow-left");
     this.arrowleft.setAttribute("class","arrows-");
     this.arrowright = document.createElement("button");
-    this.arrowright.appendChild(document.createTextNode("❯"));
+    this.icarrRight = document.createElement("span");
+    this.icarrRight.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1.1em" height="1.1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="M338.752 104.704a64 64 0 0 0 0 90.496l316.8 316.8l-316.8 316.8a64 64 0 0 0 90.496 90.496l362.048-362.048a64 64 0 0 0 0-90.496L429.248 104.704a64 64 0 0 0-90.496 0z"/></svg>';
+    this.arrowright.appendChild(this.icarrRight);
     this.arrowright.setAttribute("id","arrow-right");
     this.arrowright.setAttribute("class","arrows-");
     
@@ -420,11 +435,10 @@ variables.prototype.slideTrailsCreate =  function(){
 variables.prototype.slideTrailsDimensions = function(){
     
     var area = this.var['container']['area'];
-
     let slideToshow = this.var['slideToshow'];
     let infinite =  this.var['infinite'];
     let Pics = this.var['pics'];
-       
+    var parentElement = this.var['container']['id'];   
     
        
 
@@ -462,17 +476,17 @@ variables.prototype.slideTrailsDimensions = function(){
     
             if(area === "full"){
 
-                    slidewidth = $('#slider').width();
+                    slidewidth = $('#' + parentElement).width();
 
-                    $('#slider_container').css("width",$('#slider').width());
+                    $('#slider_container').css("width",$('#' + parentElement).width());
 
             }
             
             // in ZoomIn State
-            else if(slideWidth > $('#slider').width()){
+            else if(slideWidth > $('#' + parentElement).width()){
 
-                    slideWidth = $('#slider').width();
-                    $('#slider_container').css("width",$('#slider').width());
+                    slideWidth = $('#' + parentElement).width();
+                    $('#slider_container').css("width",$('#' + parentElement).width());
 
             }else{
                  
@@ -528,6 +542,7 @@ variables.prototype.slideTrailsHndl = function(){
             autoDelay: this.var["autoDelay"],
             autoDuration: this.var["autoDuration"],
             autoDirection:this.var['autoDirection'],
+            duration:this.var['duration'],
             mode:this.var['infinite'],
             slideToshow:this.var['slideToshow'],
             slidewidth:slideWidth,
@@ -538,7 +553,7 @@ variables.prototype.slideTrailsHndl = function(){
 
 
 
-function main(e){
+function fliderjs(e){
 
 
 let Slider = new variables(e);
