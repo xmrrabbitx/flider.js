@@ -66,7 +66,7 @@
         duration : 2000, /* in milliseconds */
         infinite:true, /*  true or false , default is true */
         slideToshow:1, /* numbers of slide you want to show */
-        auto:true, /* true , false  */
+        auto:false, /* true , false  */
         auto_delay:2000, /* in milliseconds */
         auto_duration : 3000, /* in milliseconds */
         auto_direction:"right", /* "left" direction or "right" direction */
@@ -117,17 +117,47 @@
 
 
 
+
     <script type="text/javascript" >
 
 
 
+        /* Load main function  */
+        fliderjs( {
+    
+            area:[1000,500], /* container option ( string:"full" or array:[x%,y%] )  */
+            id: "flider2", /* parent element option  */
+            pics:["1.jpg","2.jpg","3.jpg","4.jpg"], /*  names of the pictures you want to put  */
+            src_pics:"pics/", /*  src_pics is the path to your pictures ex: pics/  */
+            duration : 2000, /* in milliseconds */
+            infinite:false, /*  true or false , default is true */
+            slideToshow:1, /* numbers of slide you want to show */
+            auto:false, /* true , false  */
+            auto_delay:2000, /* in milliseconds */
+            auto_duration : 3000, /* in milliseconds */
+            auto_direction:"right", /* "left" direction or "right" direction */
+    
+            optional:{
+                
+                        arrows:true,/* true , false , "hover", "pale" */
+    
+                        css:{"arrow-left":{"background":"","border-radius":"8px","margin-left":"20px","padding":"1% 1%"},
+                            "arrow-right":{"border-radius":"8px","margin-right":"20px","padding":"1% 1%"},
+                            "slider_container":{"border-radius":"0px"},
+                            "slides_0":{"object-fit":"cover"}, /* all pictures start with 'slides_' and '0' is the begining of pic numbers  */
+                            "slides_1":{"object-fit":"cover"},
+                            "slides_2":{"object-fit":"cover"},
+                            "slides_3":{"object-fit":"cover"}
+                            
+                            }
+                        
+    
+                    }
+        });
+    
     
     </script>
     
-    
-    
-
-
 
 
 

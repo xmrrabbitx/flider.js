@@ -1,7 +1,15 @@
 
 /* Main Style Codes  */
 
-#slider_container {
+:root{
+
+  --name:'flider_container'
+
+
+}
+
+
+.flider_container {
   position: relative;
   overflow: clip;
   margin: 0px auto 0 auto;
@@ -10,7 +18,7 @@
 
 }
 
-#slider_container ul {
+.flider_container ul {
   position: relative;
   margin: 0;
   padding: 0;
@@ -19,7 +27,7 @@
 
 }
 
-#slider_container ul li {
+.flider_container ul li {
 
   position: relative;
   display: block;
@@ -30,7 +38,7 @@
 
 }
 
-#arrow-left, #arrow-right {
+.arrows- {
   position: absolute;
   top: 40%;
   z-index: 999;
@@ -66,9 +74,3 @@
   border-radius: 2px 0 0 2px;
 }
 
-.slider_option {
-  position: relative;
-  margin: 10px auto;
-  width: 160px;
-  font-size: 18px;
-}

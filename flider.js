@@ -51,10 +51,10 @@ var err = new errHdl();
 function eventHndl(){};
 
 eventHndl.prototype.Handler = function(p){
-    
+    var parentElementId = p['id'];
     var slideWidth = p['slidewidth'];
     var slideToshow = p['slideToshow'];
-    var slideCount = $('#slider_container ul li').length;
+    var slideCount =  $('#' + parentElementId +'_container ul li').length;
     var sliderUlWidth = slideCount * (slideWidth / slideToshow);
     var mode = p['mode'];
     var auto = p['auto'];
@@ -78,57 +78,67 @@ eventHndl.prototype.Handler = function(p){
             
 
                          
-                var c = -1;
+                var c = 0;
                                             
                 const arrows = document.querySelectorAll(".arrows-");
-                
+               
                 // click event  
                 function ClickEvent(){
 
-                    for(i=0;i< 2; i++){
+                    $("#" + parentElementId + "-arrow-right").click(function(){
+
+                        var arrowid = this.id.split("-")[2];
+                        var id = this.id.split("-")[0];
+
+
+                               
+                            if(c <= (picslen -2 )){
+                                            
+                                c = c + 1;
+                            }else{
+                                c = 3;
+                            }
+
                             
-                        $("#" + arrows[i].id).click(function(e){
-                                if(mode !== true){
-                                    if(this.id === "arrow-right"){
-                                            
-                                        if(c <= (picslen -2)){
-                                            
-                                            c = c + 1;
-                                        }else{
-                                        
-                                            return; 
-                                        }
-                                        
-                                        
-                                    }else{
-                                        if(c > -1 && c <= (picslen-1)){
-                                            c = c - 1;
-                                        }else{
-                                            return;
-                                        }
-                                        
-                                    }
-                                }else{
-                                    c = picslen - 1;
-                                    
-                                }
 
-                                if(auto === true && mode === true){
+                            click(id,arrowid);
+                    });
+
+                    $("#" + parentElementId + "-arrow-left").click(function(){
+
+                     
+
+                        var arrowid = this.id.split("-")[2];
+                        var id = this.id.split("-")[0];
+                        console.log(c);
+                        if(c > 0 && c <= (picslen-1)){
+                            c = c - 1;
+                        }else{
+                            c = 0;
+                        }
+                        
+
+                         click(id,arrowid);
+
+                });
+                    
+                                function click(id,arrowid){
+                                    if(auto === true && mode === true){
                                    
-                                var clickMode = "click";
-                                auto = false;
-                                clearInterval(timer);
-
+                                        var clickMode = "click";
+                                        auto = false;
+                                        clearInterval(timer);
+        
+                                        }
+                                       
+                                    
+                                        let duration = Duration;
+        
+                                        AnimateEvent(id,arrowid,clickMode,auto,duration);
+        
                                 }
-
-                                let duration = Duration;
-
-                                AnimateEvent(this.id,clickMode,auto,duration);
-
-
-                        });
-
-                    }
+                                
+                                
 
                 };
                 
@@ -142,7 +152,8 @@ eventHndl.prototype.Handler = function(p){
                   
                        let duration = autoDuration;
                         
-                       AnimateEvent(autoDirection,"disable click",true,duration)
+                       
+                       AnimateEvent(parentElementId,autoDirection,"disable click",true,duration);
 
                         
 
@@ -157,23 +168,25 @@ eventHndl.prototype.Handler = function(p){
 
 
                 // Animate Event
-                function AnimateEvent(arrowId,clickMode,auto,duration){
-
-                   
+                function AnimateEvent(parentElementId,arrowId,clickMode,auto,duration){
+                    
+              
+              
                     var anim = {
                                 false:{ 
-                                    true:{"arrow-left":{left:- ((slideWidth/slideToshow) + (slideWidth/slideToshow))},"arrow-right":{left:0}},
-                                    false:{"arrow-left":{right: ( ((slideWidth/slideToshow) * (picslen - c)) - slideWidth) },"arrow-right":{right: ( ((slideWidth/slideToshow) * (picslen - c)) - slideWidth)}}
+                                    true:{"left":{left:- ((slideWidth/slideToshow) + (slideWidth/slideToshow))},"right":{left:0}},
+                                    false:{"left":{right: ( ((slideWidth/slideToshow) * (picslen - c)) - slideWidth) },"right":{right: ( ((slideWidth/slideToshow) * (picslen - c)) - slideWidth)}}
                                 },
                                 true:{true:{"left":{left:- ((slideWidth/slideToshow) + (slideWidth/slideToshow))},"right":{left:0}}},
-                                "reverse":{right:(((slideWidth/slideToshow) * (picslen - c)) - slideWidth) },"arrow-right":{right: ( ((slideWidth/slideToshow) * (picslen - c)) - slideWidth)}
+                                "reverse":{"right":(((slideWidth/slideToshow) * (picslen - c)) - slideWidth) },"right":{right: ( ((slideWidth/slideToshow) * (picslen - c)) - slideWidth)}
                                 
 
 
                         };
+                       
+                       
 
-                 
-                    $('#slider_container ul').animate(anim[auto][mode][arrowId],duration,function(){
+                        $('#' + parentElementId +'_container ul').animate(anim[auto][mode][arrowId],duration,function(){
 
                         if(mode !== true){
 
@@ -181,12 +194,14 @@ eventHndl.prototype.Handler = function(p){
                             
                         }else{
                             
-                    
+                     
 
-                            if(arrowId === "arrow-right" || arrowId === "right"){
-                                $('#slider_container ul li:last-child').prependTo('#slider_container ul');
+                            if(arrowId  === "right"){
 
-                                $('#slider_container ul').css('left', - (slideWidth/slideToshow) );
+                          
+                                $('#' + parentElementId +'_container ul li:last-child').prependTo('#' + parentElementId +'_container ul');
+
+                                $('#' + parentElementId +'_container ul').css('left', - (slideWidth/slideToshow) );
 
                                
                                 if(clickMode === "click"){
@@ -196,11 +211,14 @@ eventHndl.prototype.Handler = function(p){
                                 }
                                 
                             
-                            }else if(arrowId === "arrow-left" || arrowId === "left"){
+                            }else if(arrowId  === "left"){
 
-                                $('#slider_container ul li:first-child').appendTo('#slider_container ul');
+                         
 
-                                $('#slider_container ul').css('left', - (slideWidth/slideToshow) );
+                                $('#' + parentElementId +'_container ul li:first-child').appendTo('#' + parentElementId +'_container ul');
+                               
+                              
+                                $('#' + parentElementId +'_container ul').css('left', - (slideWidth/slideToshow) );
 
                                 if(clickMode === "click"){
 
@@ -248,50 +266,51 @@ styleCss.prototype.Css = function(optional){
 
 
 // arrows styles modes
-styleCss.prototype.Arrows = function(optional){
+styleCss.prototype.Arrows = function(optional,id){
 
+    var parentElementId = id;
     if(optional !== null){
         
             if(optional['arrows'] === false){
-                $("#arrow-right").css("display","none");
-                $("#arrow-left").css("display","none");
+                $('#' + parentElementId +  '-arrow-right').css("display","none");
+                $('#' + parentElementId + '-arrow-left').css("display","none");
 
             } else if (optional['arrows']  === "hover"){
 
-                $("#arrow-right").css("display","none");
-                $("#arrow-left").css("display","none");
+                $('#' + parentElementId +  '-arrow-right').css("display","none");
+                $('#' + parentElementId + '-arrow-left').css("display","none");
 
-                $("#slider_container").on("mouseover",fadeIn).on("mouseenter",fadeIn).on("click",fadeIn).on("mouseleave", fadeOut);
-
+                $('#' + parentElementId +'_container').on("mouseover",fadeIn).on("mouseenter",fadeIn).on("click",fadeIn).on("mouseleave", fadeOut);
+                
 
 
             } else if (optional['arrows']  === "pale"){
 
-                $("#arrow-right").css("opacity",0.5);
-                $("#arrow-left").css("opacity",0.5);
-                $("#slider_container").on("mouseover",paleOn).on("mouseenter",paleOn).on("click",paleOn).on("mouseleave", paleOff);
+                $('#' + parentElementId +  '-arrow-right').css("opacity",0.5);
+                $('#' + parentElementId + '-arrow-left').css("opacity",0.5);
+                $('#' + parentElementId +'_container').on("mouseover",paleOn).on("mouseenter",paleOn).on("click",paleOn).on("mouseleave", paleOff);
 
             }
 
             function fadeIn(){
-                $("#arrow-right").fadeIn(500)
-                $("#arrow-left").fadeIn(500)
+                $('#' + parentElementId +  '-arrow-right').fadeIn(500)
+                $('#' + parentElementId + '-arrow-left').fadeIn(500)
 
             }
         function fadeOut(){
-                $("#arrow-right").fadeOut(500)
-                $("#arrow-left").fadeOut(500)
+            $('#' + parentElementId +  '-arrow-right').fadeOut(500)
+            $('#' + parentElementId + '-arrow-left').fadeOut(500)
         }
         function paleOn(){
 
-            $("#arrow-right").css("opacity",1);
-            $("#arrow-left").css("opacity",1);
+            $('#' + parentElementId +  '-arrow-right').css("opacity",1);
+            $('#' + parentElementId + '-arrow-left').css("opacity",1);
 
         }
         function paleOff(){
 
-            $("#arrow-right").css("opacity",0.5);
-            $("#arrow-left").css("opacity",0.5);
+            $('#' + parentElementId +  '-arrow-right').css("opacity",0.5);
+            $('#' + parentElementId + '-arrow-left').css("opacity",0.5);
 
         }
 
@@ -339,13 +358,13 @@ variables.prototype.containerCreate = function(){
 
     /* create element */
 	this.containerBlock = document.createElement("div");
-	this.containerBlock.setAttribute("name","slider_container");
-	this.containerBlock.setAttribute("id","slider_container"); 
+	this.containerBlock.setAttribute("name", parentElementId + "_container");
+	this.containerBlock.setAttribute("id", parentElementId + "_container"); 
+    this.containerBlock.setAttribute("class", "flider_container"); 
 	this.containerBlock.style.display = "";
 	parentElement.appendChild(this.containerBlock);
 
-       /* main variable for container */
-	var parentElement = document.getElementById(this.var['container']['id']);
+
     
 
         /* check for full or custom dimensions */
@@ -375,7 +394,7 @@ variables.prototype.containerCreate = function(){
         }
 
        }
-       console.log("container created");
+
 }
 
 
@@ -383,8 +402,9 @@ variables.prototype.containerCreate = function(){
 /* Create Slide Trails */
 variables.prototype.slideTrailsCreate =  function(){
 
-    var parentElement = document.getElementById(this.var['container']['id']);
-
+    var parentElementId = this.var['container']['id'];
+    var parentElement = document.getElementById(parentElementId);
+    
     let Pics = this.var['pics'];
     let SrcPics = this.var['src_pics'];
 
@@ -393,18 +413,23 @@ variables.prototype.slideTrailsCreate =  function(){
 
     this.contb = parentElement.children[0];
 
+    // Create arrow left
     this.arrowleft = document.createElement("button");
     this.icarrLeft = document.createElement("span");
     this.icarrLeft.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1.1em" height="1.1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="M685.248 104.704a64 64 0 0 1 0 90.496L368.448 512l316.8 316.8a64 64 0 0 1-90.496 90.496L232.704 557.248a64 64 0 0 1 0-90.496l362.048-362.048a64 64 0 0 1 90.496 0z"/></svg>';
     this.arrowleft.appendChild(this.icarrLeft);
-    this.arrowleft.setAttribute("id","arrow-left");
+    this.arrowleft.setAttribute("id", parentElementId + "-arrow-left");
     this.arrowleft.setAttribute("class","arrows-");
+
+    // Create arrow right
     this.arrowright = document.createElement("button");
     this.icarrRight = document.createElement("span");
     this.icarrRight.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1.1em" height="1.1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="M338.752 104.704a64 64 0 0 0 0 90.496l316.8 316.8l-316.8 316.8a64 64 0 0 0 90.496 90.496l362.048-362.048a64 64 0 0 0 0-90.496L429.248 104.704a64 64 0 0 0-90.496 0z"/></svg>';
     this.arrowright.appendChild(this.icarrRight);
-    this.arrowright.setAttribute("id","arrow-right");
+    this.arrowright.setAttribute("id",parentElementId + "-arrow-right");
     this.arrowright.setAttribute("class","arrows-");
+    
+    
     
     /* Create Pictures Elements */    
     for(var i=0; i < Pics.length; i++){
@@ -427,7 +452,8 @@ variables.prototype.slideTrailsCreate =  function(){
     this.contb.appendChild(this.arrowleft);
     this.contb.appendChild(this.arrowright);
 
-    console.log("slider created");
+
+    $("#" + parentElementId + "-arrow-right").css("right","0");
 
     return true;
 
@@ -443,13 +469,13 @@ variables.prototype.slideTrailsDimensions = function(){
     let slideToshow = this.var['slideToshow'];
     let infinite =  this.var['infinite'];
     let Pics = this.var['pics'];
-    var parentElement = this.var['container']['id'];   
-    
-       
+    var parentElementId = this.var['container']['id'];   
+    var parentElement = document.getElementById(parentElementId);
 
-    var slideCount = $('#slider_container ul li').length;
-    var slideWidth = $('#slider_container').width() ;       
-    var slideHeight = $('#slider_container').height();
+
+    var slideCount = $('#' + parentElementId + '_container ul li').length;
+    var slideWidth = $('#' + parentElementId +'_container').width() ;       
+    var slideHeight = $('#' + parentElementId + '_container').height();
         
 
     var sliderUlWidth = slideCount * (slideWidth / slideToshow);
@@ -458,46 +484,49 @@ variables.prototype.slideTrailsDimensions = function(){
 
     if(infinite !== true){
 
-            $('#slider_container ul').css({ width: sliderUlWidth  , right:  sliderUlWidth - (slideWidth / slideToshow) });
+       
+
+        $('#' + parentElementId +'_container ul').css({ width: sliderUlWidth  , right:  sliderUlWidth - (slideWidth / slideToshow) });
         
 
     }else{
 
-            $('#slider_container ul').css({ width: sliderUlWidth  , left: -  (slideWidth / slideToshow)  });
+
+        $('#' + parentElementId +'_container ul').css({ width: sliderUlWidth  , left: -  (slideWidth / slideToshow)  });
         
     }
 
 
-            $('#slider_container ul li').css({ width: slideWidth/ slideToshow, height: slideHeight });
+            $('#' + parentElementId +'_container li').css({ width: slideWidth/ slideToshow, height: slideHeight });
 
-            $('#slider_container ul li img').css({ width: slideWidth / slideToshow, height: slideHeight });
+            $('#' + parentElementId +'_container li img').css({ width: slideWidth / slideToshow, height: slideHeight });
         
         
     // Resize Event
     window.addEventListener("resize",function(e){
-            
+       
             var slideWidth = area[0];       
-            var slideHeight = $('#slider_container').height();
+            var slideHeight =  $('#' + parentElementId +'_container').height();
     
             if(area === "full"){
 
-                    slidewidth = $('#' + parentElement).width();
+                    slidewidth = $('#' + parentElementId).width();
 
-                    $('#slider_container').css("width",$('#' + parentElement).width());
+                    $('#' + parentElementId + '_container').css("width",$('#' + parentElementId).width());
 
             }
             
             // in ZoomIn State
-            else if(slideWidth > $('#' + parentElement).width()){
+            else if(slideWidth > $('#' + parentElementId).width()){
 
-                    slideWidth = $('#' + parentElement).width();
-                    $('#slider_container').css("width",$('#' + parentElement).width());
+                    slideWidth = $('#' + parentElementId).width();
+                    $('#' + parentElementId + '_container').css("width",$('#' + parentElementId).width());
 
             }else{
                  
                     // in ZoomOut State
                     slideWidth = area[0];
-                    $('#slider_container').css("width",area[0]);
+                    $('#' + parentElementId + '_container').css("width",area[0]);
 
                 }
 
@@ -506,23 +535,23 @@ variables.prototype.slideTrailsDimensions = function(){
             // Check Infinite State
             if(infinite !== true){
 
-                    $('#slider_container ul').css({ width: sliderUlWidth  , right:  sliderUlWidth - (slideWidth / slideToshow) });
+                $('#' + parentElementId + '_container ul').css({ width: sliderUlWidth  , right:  sliderUlWidth - (slideWidth / slideToshow) });
         
 
             }else{
 
-                    $('#slider_container ul').css({ width: sliderUlWidth  , left: -  (slideWidth / slideToshow)  });
+                $('#' + parentElementId + '_container ul').css({ width: sliderUlWidth  , left: -  (slideWidth / slideToshow)  });
         
             }
 
-                    $('#slider_container ul li').css({ width: slideWidth/ slideToshow, height: slideHeight });
+            $('#' + parentElementId + '_container ul li').css({ width: slideWidth/ slideToshow, height: slideHeight });
 
-                    $('#slider_container ul li img').css({ width: slideWidth / slideToshow, height: slideHeight });
+            $('#' + parentElementId + '_container ul li img').css({ width: slideWidth / slideToshow, height: slideHeight });
                 
         });
 
-            
-                 $('#slider_container ul li:last-child').prependTo('#slider_container ul');
+                 $('#' + parentElementId + '_container ul li:last-child').prependTo('#' + parentElementId + '_container ul');
+
 
 }
 
@@ -535,14 +564,14 @@ variables.prototype.slideTrailsHndl = function(){
 
        var styleObject = new styleCss();
        styleObject.Css(this.var['optional']);
-       styleObject.Arrows(this.var['optional']);
-
-        var slideWidth = $('#slider_container').width() ; 
+       styleObject.Arrows(this.var['optional'],this.var['container']['id']);
+       var parentElementId = this.var['container']['id'];
+       var slideWidth = $('#' + parentElementId + '_container').width() ; 
         
-
+       
         let eHndler = new eventHndl();
         eHndler.Handler({
-
+            id:this.var['container']['id'],
             auto: this.var["auto"],
             autoDelay: this.var["autoDelay"],
             autoDuration: this.var["autoDuration"],
