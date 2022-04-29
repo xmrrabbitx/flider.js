@@ -10,7 +10,7 @@ Demos:
 
 ##### Quick start:
 
-First of all, include flider_style.css in the head of html:
+First of all, include `flider_style.css` in the head of html:
 
 ```html
 <link  rel="stylesheet" href="flider_style.css">
@@ -22,9 +22,9 @@ Second, include flider.js in the head of html:
 <script type="text/javascript" src="flider.js" ></script>
 ```
 
-Now in the script tag of body section, Call flider function and define the necessary options:
+Now in the `script` tag of body section, Call `flider` function and define the necessary options:
 
-```html
+```javascript
 fliderjs({
 
         area:"full", /* container option ( string:"full" or array:[x%,y%] )  */
@@ -37,7 +37,7 @@ fliderjs({
 });
 ```
 
-Just remember when you define parent element, it must be an empty html tag in the body. define the id as flider:
+Just remember when you define `parent element`, it must be an empty html tag in the body. define the id as flider:
 
 ```html
 <div id="flider"></div>
@@ -45,7 +45,7 @@ Just remember when you define parent element, it must be an empty html tag in th
 
 Flider.Js Initialization with full options:
 
-```html
+```javascript
 
 /* Load main function  */
 
@@ -85,7 +85,7 @@ fliderjs( {
 
 ##### Browser support
 
-flider.js have tested on 3 browser: Firefox, Google chrome and Brave and its full responsive.
+flider.js have tested on 3 browser: `Firefox, Google chrome and Brave` and its full responsive.
 
 
 
