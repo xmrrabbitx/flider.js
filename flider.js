@@ -90,16 +90,22 @@ eventHndl.prototype.Handler = function(p){
                         var arrowid = this.id.split("-")[2];
                         var id = this.id.split("-")[0];
 
+                            console.log()
+                           
+                            if(c < (3)){
+                                console.log(c);
+                                 c = c + 1;
+                                 console.log(c);
+                                
+                            }else if(mode === true){
+                                
+                                
 
-                               
-                            if(c <= (picslen -2 )){
-                                            
-                                c = c + 1;
                             }else{
-                                c = 3;
+                                return;
                             }
 
-                            
+                        
 
                             click(id,arrowid);
                     });
@@ -110,14 +116,20 @@ eventHndl.prototype.Handler = function(p){
 
                         var arrowid = this.id.split("-")[2];
                         var id = this.id.split("-")[0];
-                        console.log(c);
-                        if(c > 0 && c <= (picslen-1)){
-                            c = c - 1;
+                       
+                        if(c > 0 && c <= 3){
+                           c = c - 1;
+                           console.log(c);
+                        }else if(mode === true){
+                                
+                                
+
                         }else{
-                            c = 0;
+                           
+                            return;
                         }
                         
-
+                      
                          click(id,arrowid);
 
                 });
@@ -571,6 +583,7 @@ variables.prototype.slideTrailsHndl = function(){
        
         let eHndler = new eventHndl();
         eHndler.Handler({
+           
             id:this.var['container']['id'],
             auto: this.var["auto"],
             autoDelay: this.var["autoDelay"],
