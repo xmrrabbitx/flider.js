@@ -181,7 +181,7 @@ eventHndl.prototype.Handler = function(p){
                             
                         }else{
                             
-                            console.log(Duration);
+                    
 
                             if(arrowId === "arrow-right" || arrowId === "right"){
                                 $('#slider_container ul li:last-child').prependTo('#slider_container ul');
@@ -346,7 +346,7 @@ variables.prototype.containerCreate = function(){
 
        /* main variable for container */
 	var parentElement = document.getElementById(this.var['container']['id']);
- 
+    
 
         /* check for full or custom dimensions */
 	if (parentElement.clientHeight === 24){
@@ -375,6 +375,7 @@ variables.prototype.containerCreate = function(){
         }
 
        }
+       console.log("container created");
 }
 
 
@@ -382,13 +383,15 @@ variables.prototype.containerCreate = function(){
 /* Create Slide Trails */
 variables.prototype.slideTrailsCreate =  function(){
 
+    var parentElement = document.getElementById(this.var['container']['id']);
+
     let Pics = this.var['pics'];
     let SrcPics = this.var['src_pics'];
 
     this.picUl = document.createElement("ul");
     this.picUl.setAttribute("id","ul_slider");
 
-    this.contb = document.getElementById("slider_container");
+    this.contb = parentElement.children[0];
 
     this.arrowleft = document.createElement("button");
     this.icarrLeft = document.createElement("span");
@@ -423,6 +426,8 @@ variables.prototype.slideTrailsCreate =  function(){
     this.contb.appendChild(this.picUl);
     this.contb.appendChild(this.arrowleft);
     this.contb.appendChild(this.arrowright);
+
+    console.log("slider created");
 
     return true;
 
