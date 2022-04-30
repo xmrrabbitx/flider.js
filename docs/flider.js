@@ -143,7 +143,6 @@ eventHndl.prototype.Handler = function(p){
                                         auto = false;
 
                                  
-                                        console.log(st);
                                         st[parentElementId] = 1;
 
                                         }
@@ -173,8 +172,6 @@ eventHndl.prototype.Handler = function(p){
                     
                             if(st[parentElementId] !== 1){
 
-                        console.log(st[parentElementId]);
-                        console.log(parentElementId);
                         
                         AnimateEvent(parentElementId,autoDirection,true,Duration);
                         
