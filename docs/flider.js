@@ -75,7 +75,11 @@ eventHndl.prototype.Handler = function(p){
         auto = false;
     }
     
-            
+
+
+    var st = {};
+    st[parentElementId] = 0;
+
 
                          
                 var c = 0;
@@ -138,16 +142,17 @@ eventHndl.prototype.Handler = function(p){
                                         var clickMode = "click";
                                         auto = false;
 
-                                        clearInterval(timer);
+                                 
+                                        console.log(st);
+                                        st[parentElementId] = 1;
 
-                                        console.log("cleared");
-                                      
                                         }
-                                       
+                                     
+                                        
                                         
                                         let duration = Duration;
         
-                                        AnimateEvent(id,arrowid,clickMode,auto,duration);
+                                        AnimateEvent(id,arrowid,auto,duration);
         
                                 }
                                 
@@ -158,34 +163,39 @@ eventHndl.prototype.Handler = function(p){
                 ClickEvent();
                
                 
-                
+              
 
                 // Auto Event
                 function AutoEvent (){ 
-                    console.log(autoDelay + autoDuration);
-                    timer = setInterval(function () {
-                  
-                       let duration = autoDuration;
-                        
-               
-                       AnimateEvent(parentElementId,autoDirection,"disable click",true,duration);
-
+                   
                     
+                        setTimeout(function () {
+                    
+                            if(st[parentElementId] !== 1){
+
+                        console.log(st[parentElementId]);
+                        console.log(parentElementId);
+                        
+                        AnimateEvent(parentElementId,autoDirection,true,Duration);
+                        
+                        }
 
                 }, autoDelay + autoDuration );
 
+            
+
             }
             if(auto === true && mode === true){
-            
+                
                 AutoEvent();
             }  
 
 
 
                 // Animate Event
-                function AnimateEvent(parentElementId,arrowId,clickMode,auto,duration){
+                function AnimateEvent(parentElementId,arrowId,auto,duration){
                     
-                   
+  
               
                     var anim = {
                                 false:{ 
@@ -200,9 +210,13 @@ eventHndl.prototype.Handler = function(p){
                         };
                        
                        
-
+                        
                         $('#' + parentElementId +'-container ul').animate(anim[auto][mode][arrowId],duration,function(){
 
+
+
+                   
+                        
                         if(mode !== true){
 
                        
@@ -219,15 +233,10 @@ eventHndl.prototype.Handler = function(p){
                                 $('#' + parentElementId +'-container ul').css('left', - (slideWidth/slideToshow) );
 
                                 $('#' + parentElementId +  "-arrow-"  + arrowId).attr("disabled", false);
-                                if(clickMode === "click"){
-                                   
-                                 
-                                  return  setTimeout(function(){
-                                    auto = true;
-                                    return AutoEvent();
-                                    },1000);
-                                    
-                                }
+                               
+                                
+
+                                
                                 
                             
                             }else if(arrowId  === "left"){
@@ -241,20 +250,15 @@ eventHndl.prototype.Handler = function(p){
 
 
                                 $('#' + parentElementId +  "-arrow-"  + arrowId).attr("disabled", false);
-                                if(clickMode === "click"){
-                                   
-                                    return  setTimeout(function(){
-
-                                        auto = true;
-                                        return AutoEvent();
-                                        },1000);
-                                        
-                                }
+                                
                                 
                             }
                             
                             
                         }
+
+                        st[parentElementId] = 0;
+                        AutoEvent();
                         
 
                     });
@@ -613,15 +617,16 @@ variables.prototype.slideTrailsHndl = function(){
 
 
 
-function fliderjs(e){
+function fliderjs(){};
 
+fliderjs.prototype.run = function(e){
 
-let Slider = new variables(e);
-Slider.containerCreate();
-Slider.slideTrailsCreate();
-Slider.slideTrailsDimensions();
-Slider.slideTrailsHndl();
-
+    let Slider = new variables(e);
+    Slider.containerCreate();
+    Slider.slideTrailsCreate();
+    Slider.slideTrailsDimensions();
+    Slider.slideTrailsHndl();
 
 
 }
+
