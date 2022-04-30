@@ -1,6 +1,6 @@
 # Flider.Js 
 
-A Free Carousel Slider Maker for Javascript It is a lightweight library for JavaScript. This library has many flexibilities for creating different sliders. In contrast to other slider makers, this library has many different modes for assigning CSS and all other cool stuff. You, as a programmer, can make a professional slider in the minimum amount of time and still make it better if you so desire.
+A Free Carousel Slider Maker for Javascript. It is a lightweight library for JavaScript. This library has many flexibilities for creating different sliders. In contrast to other slider makers, this library has many different modes for assigning CSS and all other cool stuff. You, as a programmer, can make a professional slider in the minimum amount of time and still make it better if you so desire.
 
 
 Demos:
