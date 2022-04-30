@@ -1,0 +1,28 @@
+body{
+    background: rgb(230, 230, 230);
+}
+
+#flider{
+   height:600px;
+  
+   
+}
+#flider2{
+    height:600px;
+   
+    
+ }
+ #flider3{
+    height:800px;
+   
+    
+ }
+
+
+@media only screen and (max-width: 574px) {
+#slider{
+
+    height: 200px;;
+}
+
+}

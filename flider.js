@@ -54,7 +54,7 @@ eventHndl.prototype.Handler = function(p){
     var parentElementId = p['id'];
     var slideWidth = p['slidewidth'];
     var slideToshow = p['slideToshow'];
-    var slideCount =  $('#' + parentElementId +'_container ul li').length;
+    var slideCount =  $('#' + parentElementId +'-container ul li').length;
     var sliderUlWidth = slideCount * (slideWidth / slideToshow);
     var mode = p['mode'];
     var auto = p['auto'];
@@ -121,7 +121,6 @@ eventHndl.prototype.Handler = function(p){
                            c = c - 1;
                            console.log(c);
                         }else if(mode === true){
-                                
                                 
 
                         }else{
@@ -198,7 +197,7 @@ eventHndl.prototype.Handler = function(p){
                        
                        
 
-                        $('#' + parentElementId +'_container ul').animate(anim[auto][mode][arrowId],duration,function(){
+                        $('#' + parentElementId +'-container ul').animate(anim[auto][mode][arrowId],duration,function(){
 
                         if(mode !== true){
 
@@ -211,9 +210,9 @@ eventHndl.prototype.Handler = function(p){
                             if(arrowId  === "right"){
 
                           
-                                $('#' + parentElementId +'_container ul li:last-child').prependTo('#' + parentElementId +'_container ul');
+                                $('#' + parentElementId +'-container ul li:last-child').prependTo('#' + parentElementId +'-container ul');
 
-                                $('#' + parentElementId +'_container ul').css('left', - (slideWidth/slideToshow) );
+                                $('#' + parentElementId +'-container ul').css('left', - (slideWidth/slideToshow) );
 
                                
                                 if(clickMode === "click"){
@@ -227,10 +226,10 @@ eventHndl.prototype.Handler = function(p){
 
                          
 
-                                $('#' + parentElementId +'_container ul li:first-child').appendTo('#' + parentElementId +'_container ul');
+                                $('#' + parentElementId +'-container ul li:first-child').appendTo('#' + parentElementId +'-container ul');
                                
                               
-                                $('#' + parentElementId +'_container ul').css('left', - (slideWidth/slideToshow) );
+                                $('#' + parentElementId +'-container ul').css('left', - (slideWidth/slideToshow) );
 
                                 if(clickMode === "click"){
 
@@ -256,7 +255,7 @@ eventHndl.prototype.Handler = function(p){
 function styleCss (){};
 
 // main styles
-styleCss.prototype.Css = function(optional){
+styleCss.prototype.Css = function(optional,parentElementId){
 
     if(optional !== null){
         let optionalCss = optional['css'];
@@ -266,7 +265,7 @@ styleCss.prototype.Css = function(optional){
             for(x=0;x<Object.keys(optionalCss).length;x++){
 
                 
-                $("#" + Object.keys(optionalCss)[x]).css(optionalCss[Object.keys(optionalCss)[x]]);
+                $("#" + parentElementId + "-" + Object.keys(optionalCss)[x]).css(optionalCss[Object.keys(optionalCss)[x]]);
                 
             
                 }
@@ -292,7 +291,7 @@ styleCss.prototype.Arrows = function(optional,id){
                 $('#' + parentElementId +  '-arrow-right').css("display","none");
                 $('#' + parentElementId + '-arrow-left').css("display","none");
 
-                $('#' + parentElementId +'_container').on("mouseover",fadeIn).on("mouseenter",fadeIn).on("click",fadeIn).on("mouseleave", fadeOut);
+                $('#' + parentElementId +'-container').on("mouseover",fadeIn).on("mouseenter",fadeIn).on("click",fadeIn).on("mouseleave", fadeOut);
                 
 
 
@@ -300,7 +299,7 @@ styleCss.prototype.Arrows = function(optional,id){
 
                 $('#' + parentElementId +  '-arrow-right').css("opacity",0.5);
                 $('#' + parentElementId + '-arrow-left').css("opacity",0.5);
-                $('#' + parentElementId +'_container').on("mouseover",paleOn).on("mouseenter",paleOn).on("click",paleOn).on("mouseleave", paleOff);
+                $('#' + parentElementId +'-container').on("mouseover",paleOn).on("mouseenter",paleOn).on("click",paleOn).on("mouseleave", paleOff);
 
             }
 
@@ -370,8 +369,8 @@ variables.prototype.containerCreate = function(){
 
     /* create element */
 	this.containerBlock = document.createElement("div");
-	this.containerBlock.setAttribute("name", parentElementId + "_container");
-	this.containerBlock.setAttribute("id", parentElementId + "_container"); 
+	this.containerBlock.setAttribute("name", parentElementId + "-container");
+	this.containerBlock.setAttribute("id", parentElementId + "-container"); 
     this.containerBlock.setAttribute("class", "flider_container"); 
 	this.containerBlock.style.display = "";
 	parentElement.appendChild(this.containerBlock);
@@ -485,9 +484,9 @@ variables.prototype.slideTrailsDimensions = function(){
     var parentElement = document.getElementById(parentElementId);
 
 
-    var slideCount = $('#' + parentElementId + '_container ul li').length;
-    var slideWidth = $('#' + parentElementId +'_container').width() ;       
-    var slideHeight = $('#' + parentElementId + '_container').height();
+    var slideCount = $('#' + parentElementId + '-container ul li').length;
+    var slideWidth = $('#' + parentElementId +'-container').width() ;       
+    var slideHeight = $('#' + parentElementId + '-container').height();
         
 
     var sliderUlWidth = slideCount * (slideWidth / slideToshow);
@@ -498,33 +497,33 @@ variables.prototype.slideTrailsDimensions = function(){
 
        
 
-        $('#' + parentElementId +'_container ul').css({ width: sliderUlWidth  , right:  sliderUlWidth - (slideWidth / slideToshow) });
+        $('#' + parentElementId +'-container ul').css({ width: sliderUlWidth  , right:  sliderUlWidth - (slideWidth / slideToshow) });
         
 
     }else{
 
 
-        $('#' + parentElementId +'_container ul').css({ width: sliderUlWidth  , left: -  (slideWidth / slideToshow)  });
+        $('#' + parentElementId +'-container ul').css({ width: sliderUlWidth  , left: -  (slideWidth / slideToshow)  });
         
     }
 
 
-            $('#' + parentElementId +'_container li').css({ width: slideWidth/ slideToshow, height: slideHeight });
+            $('#' + parentElementId +'-container li').css({ width: slideWidth/ slideToshow, height: slideHeight });
 
-            $('#' + parentElementId +'_container li img').css({ width: slideWidth / slideToshow, height: slideHeight });
+            $('#' + parentElementId +'-container li img').css({ width: slideWidth / slideToshow, height: slideHeight });
         
         
     // Resize Event
     window.addEventListener("resize",function(e){
        
             var slideWidth = area[0];       
-            var slideHeight =  $('#' + parentElementId +'_container').height();
+            var slideHeight =  $('#' + parentElementId +'-container').height();
     
             if(area === "full"){
 
                     slidewidth = $('#' + parentElementId).width();
 
-                    $('#' + parentElementId + '_container').css("width",$('#' + parentElementId).width());
+                    $('#' + parentElementId + '-container').css("width",$('#' + parentElementId).width());
 
             }
             
@@ -532,13 +531,13 @@ variables.prototype.slideTrailsDimensions = function(){
             else if(slideWidth > $('#' + parentElementId).width()){
 
                     slideWidth = $('#' + parentElementId).width();
-                    $('#' + parentElementId + '_container').css("width",$('#' + parentElementId).width());
+                    $('#' + parentElementId + '-container').css("width",$('#' + parentElementId).width());
 
             }else{
                  
                     // in ZoomOut State
                     slideWidth = area[0];
-                    $('#' + parentElementId + '_container').css("width",area[0]);
+                    $('#' + parentElementId + '-container').css("width",area[0]);
 
                 }
 
@@ -547,22 +546,22 @@ variables.prototype.slideTrailsDimensions = function(){
             // Check Infinite State
             if(infinite !== true){
 
-                $('#' + parentElementId + '_container ul').css({ width: sliderUlWidth  , right:  sliderUlWidth - (slideWidth / slideToshow) });
+                $('#' + parentElementId + '-container ul').css({ width: sliderUlWidth  , right:  sliderUlWidth - (slideWidth / slideToshow) });
         
 
             }else{
 
-                $('#' + parentElementId + '_container ul').css({ width: sliderUlWidth  , left: -  (slideWidth / slideToshow)  });
+                $('#' + parentElementId + '-container ul').css({ width: sliderUlWidth  , left: -  (slideWidth / slideToshow)  });
         
             }
 
-            $('#' + parentElementId + '_container ul li').css({ width: slideWidth/ slideToshow, height: slideHeight });
+            $('#' + parentElementId + '-container ul li').css({ width: slideWidth/ slideToshow, height: slideHeight });
 
-            $('#' + parentElementId + '_container ul li img').css({ width: slideWidth / slideToshow, height: slideHeight });
+            $('#' + parentElementId + '-container ul li img').css({ width: slideWidth / slideToshow, height: slideHeight });
                 
         });
 
-                 $('#' + parentElementId + '_container ul li:last-child').prependTo('#' + parentElementId + '_container ul');
+                 $('#' + parentElementId + '-container ul li:last-child').prependTo('#' + parentElementId + '-container ul');
 
 
 }
@@ -575,10 +574,10 @@ variables.prototype.slideTrailsHndl = function(){
 
 
        var styleObject = new styleCss();
-       styleObject.Css(this.var['optional']);
+       styleObject.Css(this.var['optional'],this.var['container']['id']);
        styleObject.Arrows(this.var['optional'],this.var['container']['id']);
        var parentElementId = this.var['container']['id'];
-       var slideWidth = $('#' + parentElementId + '_container').width() ; 
+       var slideWidth = $('#' + parentElementId + '-container').width() ; 
         
        
         let eHndler = new eventHndl();

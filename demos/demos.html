@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+    <head>
+
+        <! load Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
+        <! load jquery -->
+        <script type="text/javascript" src="../../jquery/jquery.min.js"></script>
+
+        <! load necessary flider files -->
+        <link  rel="stylesheet" href="../../flider_style.css">
+        <script type="text/javascript" src="../../flider.js" >
+        </script>
+
+        <! load your own styles -->
+        <link  rel="stylesheet" href="demos_style.css">
+
+
+</head>
+
+<body>
+
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-xl-12 mt-5 text-center"><h1>Demo number 1:  Centered Slider </h1></div>
+
+            <div id="flider" class="col-xl-12 mt-5 col-lg-12 col-md-12 col-sm-12 col-12 p-0" >
+                
+ 
+            </div>
+
+        </div>
+
+
+<script type="text/javascript" >
+
+
+
+    /* Load main function  */
+    fliderjs( {
+
+        area:[700,500], /* container option ( string:"full" or array:[x%,y%] )  */
+        id: "flider", /* parent element option  */
+        pics:["5.jpg","6.jpg","7.jpg","8.jpg"], /*  names of the pictures you want to put  */
+        src_pics:"pics/", /*  src_pics is the path to your pictures ex: pics/  */
+        duration : 2000, /* in milliseconds */
+        infinite:true, /*  true or false , default is true */
+        slideToshow:1, /* numbers of slide you want to show */
+        auto:true, /* true , false  */
+        auto_delay:2000, /* in milliseconds */
+        auto_duration : 3000, /* in milliseconds */
+        auto_direction:"right", /* "left" direction or "right" direction */
+
+        optional:{
+            
+                    arrows:true,/* true , false , "hover", "pale" */
+
+                    css:{"arrow-left":{"background":"","border-radius":"8px","margin-left":"20px","padding":"1% 1%"}, // arrow left style
+                        "arrow-right":{"border-radius":"8px","margin-right":"20px","padding":"1% 1%"}, // arrow right style 
+                        "container":{"border-radius":"48% 52% 51% 49% / 29% 29% 71% 71% "}, // container of slider
+                       
+                        }
+                    
+
+                }
+    });
+
+
+</script>
+
+
+
+
+    <div class="row">
+        <div class="col-xl-12 mt-5 text-center"><h1>Demo number 1:  Centered Slider </h1></div>
+
+        <div id="flider2" class="col-xl-12 mt-5 col-lg-12 col-md-12 col-sm-12 col-12 p-0" >
+            
+
+        </div>
+
+    </div>
+
+
+    <script type="text/javascript" >
+
+
+
+        /* Load main function  */
+        fliderjs( {
+    
+            area:[1000,500], /* container option ( string:"full" or array:[x%,y%] )  */
+            id: "flider2", /* parent element option  */
+            pics:["1.jpg","2.jpg","3.jpg","4.jpg"], /*  names of the pictures you want to put  */
+            src_pics:"pics/", /*  src_pics is the path to your pictures ex: pics/  */
+            duration : 2000, /* in milliseconds */
+            infinite:true, /*  true or false , default is true */
+            slideToshow:1, /* numbers of slide you want to show */
+            auto:true, /* true , false  */
+            auto_delay:2000, /* in milliseconds */
+            auto_duration : 3000, /* in milliseconds */
+            auto_direction:"right", /* "left" direction or "right" direction */
+    
+            optional:{
+                
+                arrows:true,/* true , false , "hover", "pale" */
+
+                css:{"arrow-left":{"background":"","border-radius":"8px","margin-left":"20px","padding":"1% 1%"}, // arrow left style
+                    "arrow-right":{"border-radius":"8px","margin-right":"20px","padding":"1% 1%"}, // arrow right style 
+                    "container":{"border-radius":"20px"}, // container of slider
+                
+                    }
+
+            }
+        });
+    
+    
+    </script>
+    
+
+
+
+
+    <div class="row">
+        <div class="col-xl-12 mt-5 text-center"><h1>Demo number 1:  Centered Slider </h1></div>
+
+        <div id="flider3" class="col-xl-12 mt-5 col-lg-12 col-md-12 col-sm-12 col-12 p-0" >
+            
+
+        </div>
+
+    </div>
+
+
+
+    <script type="text/javascript" >
+
+
+
+        /* Load main function  */
+        fliderjs( {
+    
+            area:"full", /* container option ( string:"full" or array:[x%,y%] )  */
+            id: "flider3", /* parent element option  */
+            pics:["1.jpg","2.jpg","3.jpg","4.jpg"], /*  names of the pictures you want to put  */
+            src_pics:"pics/", /*  src_pics is the path to your pictures ex: pics/  */
+            duration : 2000, /* in milliseconds */
+            infinite:true, /*  true or false , default is true */
+            slideToshow:1, /* numbers of slide you want to show */
+            auto:true, /* true , false  */
+            auto_delay:2000, /* in milliseconds */
+            auto_duration : 3000, /* in milliseconds */
+            auto_direction:"right", /* "left" direction or "right" direction */
+    
+            optional:{
+                
+                    arrows:true,/* true , false , "hover", "pale" */
+
+                    css:{"arrow-left":{"background":"","border-radius":"8px","margin-left":"20px","padding":"1% 1%"}, // arrow left style
+                        "arrow-right":{"border-radius":"8px","margin-right":"20px","padding":"1% 1%"}, // arrow right style 
+                        "container":{"border-radius":"0px"}, // container of slider
+                    
+                        
+
+                        }
+                        
+    
+            }
+        });
+    
+    
+    </script>
+    
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+</div>
+
+</body>
+</html>
