@@ -90,12 +90,12 @@ eventHndl.prototype.Handler = function(p){
                         var arrowid = this.id.split("-")[2];
                         var id = this.id.split("-")[0];
 
-                            console.log()
+                            
                            
                             if(c < (3)){
-                                console.log(c);
+                               
                                  c = c + 1;
-                                 console.log(c);
+                                
                                 
                             }else if(mode === true){
                                 
@@ -104,9 +104,8 @@ eventHndl.prototype.Handler = function(p){
                             }else{
                                 return;
                             }
-
-                        
-
+                            $('#' + this.id).attr("disabled", true);
+                           
                             click(id,arrowid);
                     });
 
@@ -119,7 +118,7 @@ eventHndl.prototype.Handler = function(p){
                        
                         if(c > 0 && c <= 3){
                            c = c - 1;
-                           console.log(c);
+                      
                         }else if(mode === true){
                                 
 
@@ -128,7 +127,7 @@ eventHndl.prototype.Handler = function(p){
                             return;
                         }
                         
-                      
+                        $('#' + this.id).attr("disabled", true);
                          click(id,arrowid);
 
                 });
@@ -138,11 +137,14 @@ eventHndl.prototype.Handler = function(p){
                                    
                                         var clickMode = "click";
                                         auto = false;
+
                                         clearInterval(timer);
-        
+
+                                        console.log("cleared");
+                                      
                                         }
                                        
-                                    
+                                        
                                         let duration = Duration;
         
                                         AnimateEvent(id,arrowid,clickMode,auto,duration);
@@ -154,19 +156,21 @@ eventHndl.prototype.Handler = function(p){
                 };
                 
                 ClickEvent();
-
-                    
-
+               
                 
+                
+
                 // Auto Event
-                function AutoEvent (){ timer = setInterval(function () {
+                function AutoEvent (){ 
+                    console.log(autoDelay + autoDuration);
+                    timer = setInterval(function () {
                   
                        let duration = autoDuration;
                         
-                       
+               
                        AnimateEvent(parentElementId,autoDirection,"disable click",true,duration);
 
-                        
+                    
 
                 }, autoDelay + autoDuration );
 
@@ -181,7 +185,7 @@ eventHndl.prototype.Handler = function(p){
                 // Animate Event
                 function AnimateEvent(parentElementId,arrowId,clickMode,auto,duration){
                     
-              
+                   
               
                     var anim = {
                                 false:{ 
@@ -214,11 +218,15 @@ eventHndl.prototype.Handler = function(p){
 
                                 $('#' + parentElementId +'-container ul').css('left', - (slideWidth/slideToshow) );
 
-                               
+                                $('#' + parentElementId +  "-arrow-"  + arrowId).attr("disabled", false);
                                 if(clickMode === "click"){
-                                    
+                                   
+                                 
+                                  return  setTimeout(function(){
                                     auto = true;
-                                    AutoEvent();
+                                    return AutoEvent();
+                                    },1000);
+                                    
                                 }
                                 
                             
@@ -231,10 +239,16 @@ eventHndl.prototype.Handler = function(p){
                               
                                 $('#' + parentElementId +'-container ul').css('left', - (slideWidth/slideToshow) );
 
-                                if(clickMode === "click"){
 
-                                    auto = true;
-                                    AutoEvent();
+                                $('#' + parentElementId +  "-arrow-"  + arrowId).attr("disabled", false);
+                                if(clickMode === "click"){
+                                   
+                                    return  setTimeout(function(){
+
+                                        auto = true;
+                                        return AutoEvent();
+                                        },1000);
+                                        
                                 }
                                 
                             }
