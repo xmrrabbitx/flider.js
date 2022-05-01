@@ -16,7 +16,7 @@ First of all, include `flider_style.css` in the head of html:
 <link  rel="stylesheet" href="flider_style.css">
 ```
 
-Second, include flider.js in the head of html:
+Second, include `flider.js` in the head of html:
 
 ```html
 <script type="text/javascript" src="flider.js" ></script>
@@ -79,6 +79,10 @@ fliderjs( {
                     }
 });
 ```
+
+##### Extra:
+
+You can remove docs directory, it's just example demos and nothing else ...
 
 
 ##### Browser support
