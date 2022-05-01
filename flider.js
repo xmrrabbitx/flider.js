@@ -150,7 +150,7 @@ eventHndl.prototype.Handler = function(p){
                                         
                                      
 
-                                        console.log()
+                    
                                         clearInterval(st[parentElementId]);
                                        
                                        
@@ -239,8 +239,7 @@ eventHndl.prototype.Handler = function(p){
                         }
 
                       
-                      console.log("done");
-                      console.log(clickMode);
+
                      if(clickMode === true){
                        
                     
@@ -252,7 +251,7 @@ eventHndl.prototype.Handler = function(p){
             function Auto(){
                
                     st[parentElementId] =   setInterval(() => {
-                        console.log("timer 1");
+          
                         AnimateEvent(parentElementId,autoDirection,auto,false,Duration);
 
                           },5000);
