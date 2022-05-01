@@ -623,7 +623,7 @@ variables.prototype.slideTrailsHndl = function(){
 
 
 
-function fliderjs(){
+function fliderjs(e){
 
 
     let Slider = new variables(e);
