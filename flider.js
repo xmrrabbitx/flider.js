@@ -76,82 +76,89 @@ eventHndl.prototype.Handler = function(p){
     }
     
 
-
+    
     var st = {};
-    st[parentElementId] = 0;
+    st[parentElementId] = parentElementId;
+    
 
-
-                         
                 var c = 0;
                                             
                 const arrows = document.querySelectorAll(".arrows-");
                
                 // click event  
                 function ClickEvent(){
-
-                    $("#" + parentElementId + "-arrow-right").click(function(){
-
-                        var arrowid = this.id.split("-")[2];
-                        var id = this.id.split("-")[0];
-
-                            
-                           
-                            if(c < (3)){
-                               
-                                 c = c + 1;
-                                
-                                
-                            }else if(mode === true){
-                                
-                                
-
-                            }else{
-                                return;
-                            }
-                            $('#' + this.id).attr("disabled", true);
-                           
-                            click(id,arrowid);
-                    });
-
-                    $("#" + parentElementId + "-arrow-left").click(function(){
-
-                     
-
-                        var arrowid = this.id.split("-")[2];
-                        var id = this.id.split("-")[0];
-                       
-                        if(c > 0 && c <= 3){
-                           c = c - 1;
-                      
-                        }else if(mode === true){
-                                
-
-                        }else{
-                           
-                            return;
-                        }
-                        
-                        $('#' + this.id).attr("disabled", true);
-                         click(id,arrowid);
-
-                });
+                  
                     
+                                    $("#" + parentElementId + "-arrow-right").click(function(){
+
+                                        var arrowid = this.id.split("-")[2];
+                                        var id = this.id.split("-")[0];
+
+                                        $('#' + this.id).attr("disabled", true);
+                                        
+                                            if(c < (3)){
+                                            
+                                                c = c + 1;
+                                                
+                                                
+                                            }else if(mode === true){
+                                                
+                                                
+
+                                            }else{
+                                                return;
+                                            }
+                                        
+                                        
+                                            click(id,arrowid);
+                                    });
+
+                                    $("#" + parentElementId + "-arrow-left").click(function(){
+
+                                        $('#' + this.id).attr("disabled", true);
+
+                                        var arrowid = this.id.split("-")[2];
+                                        var id = this.id.split("-")[0];
+                                    
+                                        if(c > 0 && c <= 3){
+                                        c = c - 1;
+                                    
+                                        }else if(mode === true){
+                                                
+
+                                        }else{
+                                        
+                                            return;
+                                        }
+                                        
+                                    
+                                        click(id,arrowid);
+
+                                });
+                          
                                 function click(id,arrowid){
-                                    if(auto === true && mode === true){
+
+                                 
+
                                    
-                                        var clickMode = "click";
+                                   
                                         auto = false;
 
-                                        st[parentElementId] = 1;
+                                        var clickMode = true;
+                                        
 
-                                        }
+                                        
                                      
-                                        
-                                        
+
+                                        console.log()
+                                        clearInterval(st[parentElementId]);
+                                       
+                                       
+
                                         let duration = Duration;
-        
-                                        AnimateEvent(id,arrowid,auto,duration);
-        
+
+                                        AnimateEvent(parentElementId,arrowid,auto,clickMode,duration);
+                                        Auto();
                                 }
                                 
                                 
@@ -161,37 +168,17 @@ eventHndl.prototype.Handler = function(p){
                 ClickEvent();
                
                 
-              
+                
 
                 // Auto Event
-                function AutoEvent (){ 
-                   
-                    
-                        setTimeout(function () {
-                    
-                            if(st[parentElementId] !== 1){
-
-                        
-                        AnimateEvent(parentElementId,autoDirection,true,Duration);
-                        
-                        }
-
-                }, autoDelay + autoDuration );
-
-            
-
-            }
-            if(auto === true && mode === true){
                 
-                AutoEvent();
-            }  
 
 
 
                 // Animate Event
-                function AnimateEvent(parentElementId,arrowId,auto,duration){
+                function AnimateEvent(parentElementId,arrowId,auto,clickMode,duration){
                     
-  
+               
               
                     var anim = {
                                 false:{ 
@@ -206,13 +193,10 @@ eventHndl.prototype.Handler = function(p){
                         };
                        
                        
-                        
+                    
                         $('#' + parentElementId +'-container ul').animate(anim[auto][mode][arrowId],duration,function(){
 
 
-
-                   
-                        
                         if(mode !== true){
 
                        
@@ -220,18 +204,18 @@ eventHndl.prototype.Handler = function(p){
                         }else{
                             
                      
+                            
 
                             if(arrowId  === "right"){
 
-                          
                                 $('#' + parentElementId +'-container ul li:last-child').prependTo('#' + parentElementId +'-container ul');
 
                                 $('#' + parentElementId +'-container ul').css('left', - (slideWidth/slideToshow) );
 
                                 $('#' + parentElementId +  "-arrow-"  + arrowId).attr("disabled", false);
-                               
                                 
-
+                               
+                          
                                 
                                 
                             
@@ -247,19 +231,46 @@ eventHndl.prototype.Handler = function(p){
 
                                 $('#' + parentElementId +  "-arrow-"  + arrowId).attr("disabled", false);
                                 
+                           
                                 
                             }
-                            
-                            
+                                 
+                        
                         }
 
-                        st[parentElementId] = 0;
-                        AutoEvent();
-                        
+                      
+                      console.log("done");
+                      console.log(clickMode);
+                     if(clickMode === true){
+                       
+                    
+                     }
 
                     });
                 }
-           
+
+            function Auto(){
+               
+                    st[parentElementId] =   setInterval(() => {
+                        console.log("timer 1");
+                        AnimateEvent(parentElementId,autoDirection,auto,false,Duration);
+
+                          },5000);
+                         
+                
+            }
+          
+            if(auto === true && mode === true){
+
+                Auto();
+            }
+          
+
+
+
+
+
+
 }
 
 
