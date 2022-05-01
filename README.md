@@ -22,7 +22,7 @@ Second, include flider.js in the head of html:
 <script type="text/javascript" src="flider.js" ></script>
 ```
 
-Now in the `script` tag of body section, Call `flider` function and define the necessary options:
+Now in the `script` tag of body section, Call `fliderjs` function and define the necessary options:
 
 ```javascript
 fliderjs({
