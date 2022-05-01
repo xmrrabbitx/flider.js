@@ -67,13 +67,11 @@ fliderjs( {
         
         arrows:true,/* true , false , "hover", "pale" */
     
-        css:{"arrow-left":{"background":"","border-radius":"8px","margin-left":"20px","padding":"1% 1%"},
-            "arrow-right":{"border-radius":"8px","margin-right":"20px","padding":"1% 1%"},
-            "slider_container":{"border-radius":"0px"},
-            "slides_0":{"object-fit":"cover"}, /* all pictures start with 'slides_' and '0' is the begining of pic numbers  */
-            "slides_1":{"object-fit":"cover"},
-            "slides_2":{"object-fit":"cover"},
-            "slides_3":{"object-fit":"cover"}
+        css:{"arrow-left":{"background":"","border-radius":"8px","margin-left":"20px","padding":"1% 1%"}, // arrow left style
+            "arrow-right":{"border-radius":"8px","margin-right":"20px","padding":"1% 1%"}, // arrow right style 
+            "container":{"border-radius":"48% 52% 51% 49% / 29% 29% 71% 71% "}, // container of slider
+
+     
             
             }
         
