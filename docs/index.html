@@ -79,7 +79,7 @@
 
 
 <div class="row">
-    <div class="col-xl-12 mt-5 text-center"><h1>Demo 1:  Egg shape Slider </h1></div>
+    <div class="col-xl-12 mt-5 text-center"><h1>Demo 2:  Centered Slider </h1></div>
 
     <div id="flider2" class="col-xl-12 mt-5 col-lg-12 col-md-12 col-sm-12 col-12 p-0" >
         
@@ -97,9 +97,9 @@
 /* Load main function  */
 fliderjs( {
 
-area:[100,500], /* container option ( string:"full" or array:[x%,y%] )  */
+area:[1000,500], /* container option ( string:"full" or array:[x%,y%] )  */
 id: "flider2", /* parent element option  */
-pics:["5.jpg","6.jpg","7.jpg","8.jpg"], /*  names of the pictures you want to put  */
+pics:["1.jpg","2.jpg","3.jpg","4.jpg"], /*  names of the pictures you want to put  */
 src_pics:"pics/", /*  src_pics is the path to your pictures ex: pics/  */
 duration : 2000, /* in milliseconds */
 infinite:true, /*  true or false , default is true */
@@ -115,7 +115,7 @@ optional:{
 
             css:{"arrow-left":{"background":"","border-radius":"8px","margin-left":"20px","padding":"1% 1%"}, // arrow left style
                 "arrow-right":{"border-radius":"8px","margin-right":"20px","padding":"1% 1%"}, // arrow right style 
-                "container":{"border-radius":"40px;"}, // container of slider
+                "container":{"border-radius":"20px"}, // container of slider
                
                 }
             
@@ -131,7 +131,7 @@ optional:{
 
 
 <div class="row">
-    <div class="col-xl-12 mt-5 text-center"><h1>Demo 1:  Egg shape Slider </h1></div>
+    <div class="col-xl-12 mt-5 text-center"><h1>Demo 3:  Full Screen Slider </h1></div>
 
     <div id="flider3" class="col-xl-12 mt-5 col-lg-12 col-md-12 col-sm-12 col-12 p-0" >
         
@@ -149,9 +149,9 @@ optional:{
 /* Load main function  */
 fliderjs( {
 
-area:[700,500], /* container option ( string:"full" or array:[x%,y%] )  */
+area:"full", /* container option ( string:"full" or array:[x%,y%] )  */
 id: "flider3", /* parent element option  */
-pics:["5.jpg","6.jpg","7.jpg","8.jpg"], /*  names of the pictures you want to put  */
+pics:["1.jpg","2.jpg","3.jpg","4.jpg"], /*  names of the pictures you want to put  */
 src_pics:"pics/", /*  src_pics is the path to your pictures ex: pics/  */
 duration : 2000, /* in milliseconds */
 infinite:true, /*  true or false , default is true */
@@ -167,7 +167,7 @@ optional:{
 
             css:{"arrow-left":{"background":"","border-radius":"8px","margin-left":"20px","padding":"1% 1%"}, // arrow left style
                 "arrow-right":{"border-radius":"8px","margin-right":"20px","padding":"1% 1%"}, // arrow right style 
-                "container":{"border-radius":"48% 52% 51% 49% / 29% 29% 71% 71% "}, // container of slider
+                "container":{"border-radius":"0px"}, // container of slider
                
                 }
             
@@ -177,57 +177,6 @@ optional:{
 
 
 </script>
-
-
-
-<div class="row">
-    <div class="col-xl-12 mt-5 text-center"><h1>Demo 1:  Egg shape Slider </h1></div>
-
-    <div id="flider4" class="col-xl-12 mt-5 col-lg-12 col-md-12 col-sm-12 col-12 p-0" >
-        
-
-    </div>
-
-</div>
-
-
-<script type="text/javascript" >
-
-
-
-
-/* Load main function  */
-fliderjs( {
-
-area:[700,500], /* container option ( string:"full" or array:[x%,y%] )  */
-id: "flider4", /* parent element option  */
-pics:["5.jpg","6.jpg","7.jpg","8.jpg"], /*  names of the pictures you want to put  */
-src_pics:"pics/", /*  src_pics is the path to your pictures ex: pics/  */
-duration : 2000, /* in milliseconds */
-infinite:true, /*  true or false , default is true */
-slideToshow:1, /* numbers of slide you want to show */
-auto:true, /* true , false  */
-auto_delay:2000, /* in milliseconds */
-auto_duration : 2000, /* in milliseconds */
-auto_direction:"right", /* "left" direction or "right" direction */
-
-optional:{
-    
-            arrows:true,/* true , false , "hover", "pale" */
-
-            css:{"arrow-left":{"background":"","border-radius":"8px","margin-left":"20px","padding":"1% 1%"}, // arrow left style
-                "arrow-right":{"border-radius":"8px","margin-right":"20px","padding":"1% 1%"}, // arrow right style 
-                "container":{"border-radius":"48% 52% 51% 49% / 29% 29% 71% 71% "}, // container of slider
-               
-                }
-            
-
-        }
-});
-
-
-</script>
-
 
 
 <br>

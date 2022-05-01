@@ -14,15 +14,11 @@ body{
     
  }
  #flider3{
-    height:800px;
+    height:1000px;
    
     
  }
- #flider4{
-    height:800px;
-   
-    
- }
+ 
 
 
 @media only screen and (max-width: 574px) {
