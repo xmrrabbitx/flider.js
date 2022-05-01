@@ -3,12 +3,12 @@
 A Free Carousel Slider Maker for Javascript. It is a lightweight library for JavaScript. This library has many flexibilities for creating different sliders. In contrast to other slider makers, this library has many different modes for assigning CSS and all other cool stuff. You, as a programmer, can make a professional slider in the minimum amount of time and still make it better if you so desire.
 
 
-# Demos:
+## Demos:
 
 You can check all demos via this link: https://xmrrabbitx.github.io/flider.js/
 
 
-# Quick start:
+## Quick start:
 
 First of all, include `flider_style.css` in the head of html:
 
@@ -80,18 +80,18 @@ fliderjs( {
 });
 ```
 
-# Extra:
+## Extra:
 
 You can remove docs directory, it's just example demos and nothing else ...
 
 
-# Browser support
+## Browser support
 
 flider.js have tested on 3 browser: `Firefox, Google chrome and Brave` and its full responsive.
 
 
 
-# License
+## License
 
 Copyright (c) 2022 xmrrabbitx
 
