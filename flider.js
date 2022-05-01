@@ -623,9 +623,8 @@ variables.prototype.slideTrailsHndl = function(){
 
 
 
-function fliderjs(){};
+function fliderjs(){
 
-fliderjs.prototype.run = function(e){
 
     let Slider = new variables(e);
     Slider.containerCreate();
