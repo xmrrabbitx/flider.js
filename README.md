@@ -37,7 +37,7 @@ fliderjs({
 });
 ```
 
-Just remember when you define `parent element`, it must be an empty html tag in the body. define the id as flider:
+Just remember when you define `parent element`, it must be an empty html tag in the body. define the id as you want like flider or flider 1 or anything you desire:
 
 ```html
 <div id="flider"></div>
