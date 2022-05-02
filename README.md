@@ -5,7 +5,7 @@ A Free Carousel Slider Maker for Javascript. It is a lightweight library for Jav
 
 ## Demos
 
-You can check all demos via this link: http://fliderjs.gigfa.com/
+You can check all demos via this link: https://xmrrabbitx.github.io/demos_fliderjs/
 
 
 ## Quick start
