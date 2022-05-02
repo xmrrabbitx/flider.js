@@ -150,7 +150,7 @@ eventHndl.prototype.Handler = function(p){
                                         
                                      
 
-                    
+                           
                                         clearInterval(st[parentElementId]);
                                        
                                        
@@ -238,8 +238,7 @@ eventHndl.prototype.Handler = function(p){
                         
                         }
 
-                      
-
+                  
                      if(clickMode === true){
                        
                     
@@ -251,7 +250,7 @@ eventHndl.prototype.Handler = function(p){
             function Auto(){
                
                     st[parentElementId] =   setInterval(() => {
-          
+                 
                         AnimateEvent(parentElementId,autoDirection,auto,false,Duration);
 
                           },5000);
@@ -622,9 +621,7 @@ variables.prototype.slideTrailsHndl = function(){
 }
 
 
-
 function fliderjs(e){
-
 
     let Slider = new variables(e);
     Slider.containerCreate();
