@@ -355,7 +355,6 @@ styleCss.prototype.Arrows = function(optional,id){
 
 
 
-
 /* Main Variables */
 function variables(e){
 
