@@ -18,7 +18,7 @@ npm install fliderjs
 First of all, include `flider_style.css` in the head of html:
 
 ```html
-<link  rel="stylesheet" href="flider_style.css">
+<link  rel="stylesheet" href="css/flider_style.css">
 ```
 
 Second, import `flider.js` as a module:
