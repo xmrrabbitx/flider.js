@@ -8,6 +8,11 @@ A Free Carousel Slider Maker for Javascript. It is a lightweight library for Jav
 You can check all demos via this link: https://xmrrabbitx.github.io/demos_fliderjs/
 
 
+## install via npm
+```javascript
+npm install fliderjs
+```
+
 ## Quick start
 
 First of all, include `flider_style.css` in the head of html:
@@ -21,10 +26,18 @@ Second, import `flider.js` as a module:
 ```html
 <script type="module">
 
-        import {fliderjs} from "./flider.js";
+        import {fliderjs} from "./fliderjs/flider.js";
 
 </script>
 ```
+
+
+Third, import `jquery.js`:
+
+```html
+<script type="text/javascript" src="jquery.js"></script>
+```
+
 
 Now Call `fliderjs` function and define the necessary options:
 
@@ -51,7 +64,7 @@ Flider.Js Initialization with full options:
 
 ```javascript
 
-import {fliderjs} from "./flider.js";
+import {fliderjs} from "./fliderjs/flider.js";
 
 /* Load main function  */
 
