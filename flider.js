@@ -1,17 +1,3 @@
-
-function spawnNotification(body, icon, title) {
-    var options = {
-        body: body,
-        icon: icon
-    }
-    var notification = new Notification(title, options);
-    return notification;
-  }
-
-  spawnNotification();
-
-
-
 import {error} from "./modules/error_handling/errhndl.js"
 
 
