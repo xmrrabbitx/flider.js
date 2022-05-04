@@ -1,5 +1,5 @@
 import {error} from "./modules/error_handling/errhndl.js"
-
+import {styleCss} from "./modules/style/style.js"
 
 /* Event handling function*/
 function eventHndl(){};
@@ -112,7 +112,11 @@ eventHndl.prototype.Handler = function(p){
                                         let duration = Duration;
 
                                         AnimateEvent(parentElementId,arrowid,auto,clickMode,duration);
-                                        Auto();
+                                 
+                                            Auto();
+
+                                        
+                                       
                                 }
                                 
                                 
@@ -132,7 +136,7 @@ eventHndl.prototype.Handler = function(p){
                 // Animate Event
                 function AnimateEvent(parentElementId,arrowId,auto,clickMode,duration){
                     
-               
+                   
               
                     var anim = {
                                 false:{ 
@@ -202,12 +206,14 @@ eventHndl.prototype.Handler = function(p){
                 }
 
             function Auto(){
-               
+                if(auto === true && mode === true){
                     st[parentElementId] =   setInterval(() => {
-                 
+                        
                         AnimateEvent(parentElementId,autoDirection,auto,false,Duration);
 
                           },5000);
+                        }
+                        
                          
                 
             }
@@ -225,87 +231,6 @@ eventHndl.prototype.Handler = function(p){
 
 }
 
-
-
-/*  css styles   */
-
-function styleCss (){};
-
-// main styles
-styleCss.prototype.Css = function(optional,parentElementId){
-
-    if(optional !== null){
-        let optionalCss = optional['css'];
-
-        if(optional['css'] !== null && optional['css'] !== "" && optional['css'] !== undefined){
-
-            for(let x=0;x<Object.keys(optionalCss).length;x++){
-
-                
-                $("#" + parentElementId + "-" + Object.keys(optionalCss)[x]).css(optionalCss[Object.keys(optionalCss)[x]]);
-                
-            
-                }
-
-        }
-    }
-
-}
-
-
-// arrows styles modes
-styleCss.prototype.Arrows = function(optional,id){
-
-    var parentElementId = id;
-    if(optional !== null){
-        
-            if(optional['arrows'] === false){
-                $('#' + parentElementId +  '-arrow-right').css("display","none");
-                $('#' + parentElementId + '-arrow-left').css("display","none");
-
-            } else if (optional['arrows']  === "hover"){
-
-                $('#' + parentElementId +  '-arrow-right').css("display","none");
-                $('#' + parentElementId + '-arrow-left').css("display","none");
-
-                $('#' + parentElementId +'-container').on("mouseover",fadeIn).on("mouseenter",fadeIn).on("click",fadeIn).on("mouseleave", fadeOut);
-                
-
-
-            } else if (optional['arrows']  === "pale"){
-
-                $('#' + parentElementId +  '-arrow-right').css("opacity",0.5);
-                $('#' + parentElementId + '-arrow-left').css("opacity",0.5);
-                $('#' + parentElementId +'-container').on("mouseover",paleOn).on("mouseenter",paleOn).on("click",paleOn).on("mouseleave", paleOff);
-
-            }
-
-            function fadeIn(){
-                $('#' + parentElementId +  '-arrow-right').fadeIn(500)
-                $('#' + parentElementId + '-arrow-left').fadeIn(500)
-
-            }
-        function fadeOut(){
-            $('#' + parentElementId +  '-arrow-right').fadeOut(500)
-            $('#' + parentElementId + '-arrow-left').fadeOut(500)
-        }
-        function paleOn(){
-
-            $('#' + parentElementId +  '-arrow-right').css("opacity",1);
-            $('#' + parentElementId + '-arrow-left').css("opacity",1);
-
-        }
-        function paleOff(){
-
-            $('#' + parentElementId +  '-arrow-right').css("opacity",0.5);
-            $('#' + parentElementId + '-arrow-left').css("opacity",0.5);
-
-        }
-
-    }
-
-
-}
 
 
 
@@ -499,7 +424,8 @@ variables.prototype.slideTrailsDimensions = function(){
     
             if(area === "full"){
 
-                    slidewidth = $('#' + parentElementId).width();
+                    console.log("full");
+                    slideWidth = $('#' + parentElementId).width();
 
                     $('#' + parentElementId + '-container').css("width",$('#' + parentElementId).width());
 
@@ -508,6 +434,7 @@ variables.prototype.slideTrailsDimensions = function(){
             // in ZoomIn State
             else if(slideWidth > $('#' + parentElementId).width()){
 
+                    console.log("un full");
                     slideWidth = $('#' + parentElementId).width();
                     $('#' + parentElementId + '-container').css("width",$('#' + parentElementId).width());
 
