@@ -1,0 +1,16 @@
+{
+  "name": "fliderjs",
+  "version": "0.0.1",
+  "description": "A Free Carousel Slider Maker for Javascript. It is a lightweight library for JavaScript. This library has many flexibilities for creating different sliders. In contrast to other slider makers, this library has many different modes for assigning CSS and all other cool stuff. You, as a programmer, can make a professional slider in the minimum amount of time and still make it better if you so desire.",
+  "main": "flider.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xmrrabbitx/flider.js"
+  },
+  "keywords": ["js","slider","fliderjs"],
+  "author": "xmrrabbitx",
+  "license": "MIT"
+}
