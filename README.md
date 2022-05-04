@@ -16,13 +16,17 @@ First of all, include `flider_style.css` in the head of html:
 <link  rel="stylesheet" href="flider_style.css">
 ```
 
-Second, include `flider.js` in the head of html:
+Second, import `flider.js` as a module:
 
 ```html
-<script type="text/javascript" src="flider.js" ></script>
+<script type="module">
+
+        import {fliderjs} from "./flider.js";
+
+</script>
 ```
 
-Now in the `script` tag of body section, Call `fliderjs` function and define the necessary options:
+Now Call `fliderjs` function and define the necessary options:
 
 ```javascript
 fliderjs({
@@ -46,6 +50,8 @@ Just remember when you define `parent element`, it must be an empty html tag in 
 Flider.Js Initialization with full options:
 
 ```javascript
+
+import {fliderjs} from "./flider.js";
 
 /* Load main function  */
 
@@ -80,9 +86,6 @@ fliderjs( {
 });
 ```
 
-## Extra
-
-You can remove docs directory, it's just example demos and nothing else ...
 
 
 ## Browser support
