@@ -2,7 +2,6 @@ import {error} from "./modules/error_handling/errhndl.js"
 import {styleCss} from "./modules/style/style.js"
 
 
-
 /* Event handling function*/
  function eventHndl(){};
 
