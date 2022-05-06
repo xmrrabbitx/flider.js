@@ -1,8 +1,10 @@
 import {error} from "./modules/error_handling/errhndl.js"
 import {styleCss} from "./modules/style/style.js"
 
+
+
 /* Event handling function*/
-function eventHndl(){};
+ function eventHndl(){};
 
 eventHndl.prototype.Handler = function(p){
     var parentElementId = p['id'];
@@ -29,7 +31,7 @@ eventHndl.prototype.Handler = function(p){
         auto = false;
     }
     
-
+    var automode = auto;
     
     var st = {};
     st[parentElementId] = parentElementId;
@@ -95,10 +97,12 @@ eventHndl.prototype.Handler = function(p){
                                  
 
                                    
-                                   
+                                        if(auto === true){
+                                            var clickMode = true;
+                                        }
                                         auto = false;
 
-                                        var clickMode = true;
+                                       
                                         
 
                                         
@@ -113,8 +117,11 @@ eventHndl.prototype.Handler = function(p){
 
                                         AnimateEvent(parentElementId,arrowid,auto,clickMode,duration);
                                  
-                                            Auto();
-
+                                        if(clickMode === true){
+                                            auto = true;
+                                        }
+                                         Auto();
+                                        
                                         
                                        
                                 }
@@ -192,20 +199,22 @@ eventHndl.prototype.Handler = function(p){
                            
                                 
                             }
-                                 
+                            if(clickMode){
+                                auto = true;
+                                console.log("okkk");
+                            }
                         
                         }
 
-                  
-                     if(clickMode === true){
                        
-                    
-                     }
 
+                 
+                     
                     });
                 }
 
             function Auto(){
+                console.log(auto);
                 if(auto === true && mode === true){
                     st[parentElementId] =   setInterval(() => {
                         
@@ -235,7 +244,7 @@ eventHndl.prototype.Handler = function(p){
 
 
 /* Main Variables */
-function variables(e){
+export function variables(e){
 
     this.var = {id:e['id'] ?? null, area:e['area'] ?? null, pics:e['pics'] ?? null, src_pics:e['src_pics'] ?? null,
                 duration:e['duration'] ?? null,infinite:e['infinite'] ?? true ,slideToshow:e['slideToshow'] ?? 1,
@@ -277,7 +286,7 @@ variables.prototype.containerCreate = function(){
 	this.containerBlock.style.display = "";
 	parentElement.appendChild(this.containerBlock);
 
-    console.log("container");
+  
 
     
 
@@ -424,7 +433,7 @@ variables.prototype.slideTrailsDimensions = function(){
     
             if(area === "full"){
 
-                    console.log("full");
+               
                     slideWidth = $('#' + parentElementId).width();
 
                     $('#' + parentElementId + '-container').css("width",$('#' + parentElementId).width());
@@ -434,7 +443,7 @@ variables.prototype.slideTrailsDimensions = function(){
             // in ZoomIn State
             else if(slideWidth > $('#' + parentElementId).width()){
 
-                    console.log("un full");
+             
                     slideWidth = $('#' + parentElementId).width();
                     $('#' + parentElementId + '-container').css("width",$('#' + parentElementId).width());
 
@@ -501,6 +510,7 @@ variables.prototype.slideTrailsHndl = function(){
 
                         });
 }
+
 
 
 export function fliderjs(e){
