@@ -1,4 +1,7 @@
 
+
+
+
 /* Event handling function*/
 export function eventHndl(){};
 
@@ -43,8 +46,13 @@ eventHndl.prototype.Handler = function(p){
                     
                                     $("#" + parentElementId + "-arrow-right").click(function(){
 
+                                       
+                                      
+
                                         var arrowid = this.id.split("-")[2];
                                         var id = this.id.split("-")[0];
+
+                                        DotHndling(arrowid);
 
                                         $('#' + this.id).attr("disabled", true);
                                         
@@ -67,10 +75,16 @@ eventHndl.prototype.Handler = function(p){
 
                                     $("#" + parentElementId + "-arrow-left").click(function(){
 
+
+                                     
+
+
                                         $('#' + this.id).attr("disabled", true);
 
                                         var arrowid = this.id.split("-")[2];
                                         var id = this.id.split("-")[0];
+
+                                        DotHndling(arrowid);
                                     
                                         if(c > 0 && c <= 3){
                                         c = c - 1;
@@ -90,8 +104,8 @@ eventHndl.prototype.Handler = function(p){
                           
                                 function click(id,arrowid){
 
-                                 
-
+                                   
+                                
                                    
                                    
                                         auto = false;
@@ -99,8 +113,8 @@ eventHndl.prototype.Handler = function(p){
                                         var clickMode = true;
                                         
 
+                                       
                                         
-                                     
 
                            
                                         clearInterval(st[parentElementId]);
@@ -110,7 +124,8 @@ eventHndl.prototype.Handler = function(p){
                                         let duration = Duration;
 
                                         AnimateEvent(parentElementId,arrowid,auto,clickMode,duration);
-                                 
+                                       
+                                        auto = true;
                                             Auto();
 
                                         
@@ -124,9 +139,75 @@ eventHndl.prototype.Handler = function(p){
                 ClickEvent();
                
                 
-                
+               
+                var index = 0;
 
-                // Auto Event
+                // Dot Event
+                function DotHndling(dir){
+
+                    
+
+                    var dotId = parseInt(($('#' + parentElementId +'-container ul li img:first-child')[1].id).split("_")[1]);
+                    
+
+                    
+
+                    
+                    if(dir === "right"){
+                            
+                                if(index === (picslen - 1)){
+                                    $("#" + parentElementId + "_" + (index) + "_dots_circles").css({opacity:"0.7",background:"#a9a9a9"});
+                                
+                                    index = 0;
+
+                                    $("#" + parentElementId + "_" + (index) + "_dots_circles").css({opacity:"1",background:"black"});
+                                
+                                }
+                                else{
+
+                            
+                                    index = index + 1;
+                    
+                                $("#" + parentElementId + "_" + (index - 1) + "_dots_circles").css({opacity:"0.7",background:"#a9a9a9"});
+                                
+                                $("#" + parentElementId + "_" + (index) + "_dots_circles").css({opacity:"1",background:"black"});
+                                
+                        
+                            }
+                            
+
+                    }else if(dir === "left"){
+
+                        
+
+                        
+                        if(index === 0){
+                            $("#" + parentElementId + "_" + (index) + "_dots_circles").css({opacity:"0.7",background:"#a9a9a9"});
+                           
+                            
+                            index = picslen;
+                        
+
+                            $("#" + parentElementId + "_" + (index) + "_dots_circles").css({opacity:"1",background:"black"});
+                        
+
+                        }
+                        index = index - 1;
+
+                        $("#" + parentElementId + "_" + (index + 1) + "_dots_circles").css({opacity:"0.7",background:"#a9a9a9"});
+                                
+                        $("#" + parentElementId + "_" + (index) + "_dots_circles").css({opacity:"1",background:"black"});
+                        
+
+
+
+
+                        
+                    }
+
+                 
+
+                }
                 
 
 
@@ -151,8 +232,7 @@ eventHndl.prototype.Handler = function(p){
                        
                     
                         $('#' + parentElementId +'-container ul').animate(anim[auto][mode][arrowId],duration,function(){
-
-
+              
                         if(mode !== true){
 
                        
@@ -163,6 +243,7 @@ eventHndl.prototype.Handler = function(p){
                             
 
                             if(arrowId  === "right"){
+
 
                                 $('#' + parentElementId +'-container ul li:last-child').prependTo('#' + parentElementId +'-container ul');
 
@@ -204,11 +285,16 @@ eventHndl.prototype.Handler = function(p){
                 }
 
             function Auto(){
+ 
                 if(auto === true && mode === true){
                     st[parentElementId] =   setInterval(() => {
                         
                         AnimateEvent(parentElementId,autoDirection,auto,false,Duration);
 
+                        
+                        DotHndling(autoDirection);
+                     
+                       
                           },5000);
                         }
                         

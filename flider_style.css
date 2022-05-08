@@ -1,0 +1,73 @@
+
+/* Main Style Codes  */
+
+:root{
+
+  --name:'flider_container'
+
+
+}
+
+
+.flider_container {
+  position: relative;
+  overflow: clip;
+  margin: 0px auto 0 auto;
+  opacity:1;
+  
+}
+
+.flider_container ul {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: 200px;
+  list-style: none;
+
+}
+
+.flider_container ul li {
+
+  position: relative;
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+
+
+}
+
+.arrows- {
+  position: absolute;
+  top: 45%;
+  z-index: 999;
+  display: block;
+  padding: 4% 3%;
+  width: auto;
+  height: auto;
+  background: #e9e9e9;
+  color: rgb(12, 12, 12);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  opacity: 0.8;
+  cursor: pointer;
+  user-select: none;
+  border: none
+
+ 
+}
+
+.arrows-:hover {
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+
+.fliderjs_dots_circles{
+
+  display: inline-block;
+  background-color: #a9a9a9;
+  opacity: 0.7;
+
+}

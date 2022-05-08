@@ -5,7 +5,7 @@ function errHdl(){};
 /* Error Handling Empty Method */
  errHdl.prototype.empty = function(e){
     var parentElementId = e['id'];
-    console.log(parentElementId);
+
     for(let x=0;x<Object.keys(e).length;x++){
         
         if(e[Object.keys(e)[x]] === "" || e[Object.keys(e)[x]] === undefined){

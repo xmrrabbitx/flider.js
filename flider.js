@@ -1,6 +1,7 @@
 import {error} from "./modules/error_handling/errhndl.js"
 import {styleCss} from "./modules/style/style.js"
 import {eventHndl} from "./modules/event_handling/event_hndl.js"
+import { dots } from "./modules/dots_handling/dots.js";
 
 
 
@@ -12,7 +13,7 @@ export function variables(e){
                 duration:e['duration'] ?? null,infinite:e['infinite'] ?? true ,slideToshow:e['slideToshow'] ?? 1,
                 auto:e['auto'] ?? null,autoDelay:e['auto_delay'] ?? null,autoDuration:e['auto_duration'] ?? null,
                 autoDirection:e['auto_direction'] ?? "right",
-                optional:e['optional'] ?? null
+                optional:e['optional'] ?? null,dots:e['dots'] ?? null
 
 
         };
@@ -118,7 +119,7 @@ variables.prototype.slideTrailsCreate =  function(){
     
     /* Create Pictures Elements */    
     for(var i=0; i < Pics.length; i++){
-
+    
         this.picLi = document.createElement("li");
 
         this.pic = document.createElement("img");
@@ -130,6 +131,7 @@ variables.prototype.slideTrailsCreate =  function(){
         this.picLi.appendChild(this.pic);
         this.picUl.appendChild(this.picLi);
 
+       
         
     }
 
@@ -248,10 +250,17 @@ variables.prototype.slideTrailsDimensions = function(){
 /* Slide Trail Handle: all variable pass through this method */
 variables.prototype.slideTrailsHndl = function(){
 
-
+    if(this.var['optional'] !== null){
        var styleObject = new styleCss();
        styleObject.Css(this.var['optional'],this.var['id']);
        styleObject.Arrows(this.var['optional'],this.var['id']);
+
+    }
+     if(this.var['dots'] !== null){
+      
+       var dotObject = new dots();
+       dotObject.create(this.var);
+    }
        var parentElementId = this.var['id'];
        var slideWidth = $('#' + parentElementId + '-container').width() ; 
         
@@ -271,6 +280,8 @@ variables.prototype.slideTrailsHndl = function(){
             pics:this.var['pics']
 
                         });
+
+
 }
 
 
