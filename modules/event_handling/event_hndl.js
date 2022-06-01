@@ -95,23 +95,25 @@ eventHndl.prototype.Handler = function(p,slidewidth){
 
                                           
                                             if(cliclLock){
-                                          
-                                            var prevIndex = index; 
+                                            
+                                                var prevIndex = index; 
 
-                                            // redefine index
-                                            index = SlideToGo;
+                                                
 
-                                            cliclLock = false;
+                                                // redefine index
+                                                index = SlideToGo;
+
+                                                cliclLock = false;
 
                                             }
                                           
                                            let dots = true;
 
-                                           ("dots: " + prevIndex ,index);
+                                           
 
                                            click(SlideToGo,false,prevIndex,dots);
                                           
-                                          
+                                            
 
                                         });
 
@@ -170,7 +172,7 @@ eventHndl.prototype.Handler = function(p,slidewidth){
 
                                     clearInterval(st[parentElementId]);
 
-                                    
+                                    console.log(prevIndex,index);
                                     
                                     DotHndling(index,prevIndex);
 
@@ -194,7 +196,8 @@ eventHndl.prototype.Handler = function(p,slidewidth){
 
                 // Dot Event
                 function DotHndling(index,prevIndex){
-
+                    
+                    
                     
                     $("#" + parentElementId + "_" +  "_dot_element").attr("disabled", true);
 
@@ -213,7 +216,7 @@ eventHndl.prototype.Handler = function(p,slidewidth){
                 // Animate Event
                 function AnimateEvent(slideindex,arrowId,prevIndex,dots=false,dur){
 
-                       
+                      
 
                         // infinite False
                         if(infinite_State !== true){
@@ -314,12 +317,14 @@ eventHndl.prototype.Handler = function(p,slidewidth){
                                     
                                 }
 
-                                cliclLock = true;
+                                
                                     
                             }
                             
                                 
-                        
+                            cliclLock = true;
+
+                            
 
                     });
 
@@ -334,7 +339,9 @@ eventHndl.prototype.Handler = function(p,slidewidth){
                 
                 if(auto === true && infinite_State === true){
                     st[parentElementId] =   setInterval(() => {
-                        
+
+                        console.log("start");
+
                         AnimateEvent(parentElementId,autoDirection,auto,false,autoDuration);
 
                         let prevIndex = index; 
@@ -343,9 +350,9 @@ eventHndl.prototype.Handler = function(p,slidewidth){
 
                         DotHndling(index,prevIndex);
 
-                      
                         
-                          },autoDelay);
+                        
+                          },autoDelay + autoDuration);
                 }
                          
                 
