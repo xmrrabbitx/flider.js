@@ -49,18 +49,14 @@ dots.prototype.create = function (e){
        
       let PicsLenght = e['pics'].length;
        
-       if(e['autoDirection'] === "right"){
+      
         
         $("#" + parentElementId + "_" + (PicsLenght - PicsLenght) + "_dots_circles").css({"opacity":"1","background":"black"});
 
-       }else if (e['autoDirection'] === "left"){
-     
-        $("#" + parentElementId + "_" + (PicsLenght - 1) + "_dots_circles").css({"opacity":"1","background":"black"});
-
-
-       }
+       
         
 
     }
 
 };
+

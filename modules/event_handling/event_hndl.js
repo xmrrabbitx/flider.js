@@ -5,313 +5,405 @@
 /* Event handling function*/
 export function eventHndl(){};
 
-eventHndl.prototype.Handler = function(p){
+eventHndl.prototype.Handler = function(p,slidewidth){
+
+    // init variables
     var parentElementId = p['id'];
-    var slideWidth = p['slidewidth'];
+    var slideWidth = slidewidth;
     var slideToshow = p['slideToshow'];
     var slideCount =  $('#' + parentElementId +'-container ul li').length;
     var sliderUlWidth = slideCount * (slideWidth / slideToshow);
-    var mode = p['mode'];
+    var infinite_State = p['infinite'];
     var auto = p['auto'];
     var Duration = p['duration'];
     var autoDirection = p['autoDirection'];
     var autoDelay = p['autoDelay'];
     var autoDuration = p['autoDuration'];
     var picslen = p["pics"].length;
+    var area = p['area'];
+    var direction = p['direction'];
 
 
-    if(auto === null || auto  === false){
-        auto = false;
-    }else if (auto == true){
-        auto = true;
-    }else if (auto === "reverse"){
-        auto = "reverse";
-    }else{
-        auto = false;
-    }
-    
 
-    
     var st = {};
     st[parentElementId] = parentElementId;
-    
 
-                var c = 0;
-                                            
+    var index = 0;
+
+    var cliclLock = true;
+
+                        
                 const arrows = document.querySelectorAll(".arrows-");
                
+                // index handler
+                function indexHndl(dir){
+                    if(dir ==="right"){
+                    if(infinite_State){
+
+                        if(index <= 0){
+                            index = picslen-1;
+                        }else{
+                        index--;
+                        }
+                    }else{
+                        
+                            if(index > 0){
+                            index--;
+
+                        
+                            }
+                     
+                    }
+
+                }else{
+
+
+                    if(infinite_State){
+                                            
+                        if(index >= (picslen-1)){
+                            index = 0;
+                        }else{
+                        index++;
+                        }
+                    }else{
+                        
+                            if(index < (picslen-1)){
+                            index++;
+                            }
+                        
+
+                    }
+
+                }
+
+                  
+                   
+                }
+
+
                 // click event  
                 function ClickEvent(){
                   
-                    
-                                    $("#" + parentElementId + "-arrow-right").click(function(){
 
-                                       
-                                      
+                                    for(let i=0; i < picslen; i++){
 
-                                        var arrowid = this.id.split("-")[2];
-                                        var id = this.id.split("-")[0];
+                                        $("#" + parentElementId + "_" + i + "_dots_circles").click(function(e){
 
-                                        DotHndling(arrowid);
-
-                                        $('#' + this.id).attr("disabled", true);
                                         
-                                            if(c < (3)){
-                                            
-                                                c = c + 1;
-                                                
-                                                
-                                            }else if(mode === true){
-                                                
-                                                
+                                          
+                                          let SlideToGo = ($("#" + this.id).attr("id")).split("_")[1];
 
-                                            }else{
-                                                return;
+                                          
+                                            if(cliclLock){
+                                          
+                                            var prevIndex = index; 
+
+                                            // redefine index
+                                            index = SlideToGo;
+
+                                            cliclLock = false;
+
                                             }
+                                          
+                                           let dots = true;
+
+                                           ("dots: " + prevIndex ,index);
+
+                                           click(SlideToGo,false,prevIndex,dots);
+                                          
+                                          
+
+                                        });
+
+                                    }
+
+
+                                    $("#" + parentElementId + "-arrow-right").click(function(){
+                                        
+                                        let prevIndex = index;
+
+                                         // disable arrow right
+                                        $('#' + this.id).attr("disabled", true);
+
+                                        let arrowid = this.id.split("-")[2];
                                         
                                         
-                                            click(id,arrowid);
+                                        indexHndl(arrowid);
+
+                                     
+                                        click(index,arrowid,prevIndex);
+
                                     });
 
                                     $("#" + parentElementId + "-arrow-left").click(function(){
 
+                                        let prevIndex = index;
 
-                                     
-
-
+                                        // disable arrow left
                                         $('#' + this.id).attr("disabled", true);
 
-                                        var arrowid = this.id.split("-")[2];
-                                        var id = this.id.split("-")[0];
+                                        let arrowid = this.id.split("-")[2];
 
-                                        DotHndling(arrowid);
-                                    
-                                        if(c > 0 && c <= 3){
-                                        c = c - 1;
-                                    
-                                        }else if(mode === true){
-                                                
 
-                                        }else{
-                                        
-                                            return;
-                                        }
-                                        
-                                    
-                                        click(id,arrowid);
+                                        indexHndl(arrowid);
+
+                               
+                                        click(index,arrowid,prevIndex);
+                            
 
                                 });
                           
-                                function click(id,arrowid){
 
-                                   
-                                
-                                   
-                                   
+                                function click(ind,arrowid,prevIndex,dots){
+
+                                 
+
+                                  var initauto = auto;
+                                    if(auto === true){
+                                        
                                         auto = false;
 
-                                        var clickMode = true;
+                                    }
+                                    
+                                    
                                         
 
-                                       
-                                        
+                                    clearInterval(st[parentElementId]);
 
-                           
-                                        clearInterval(st[parentElementId]);
-                                       
-                                       
+                                    
+                                    
+                                    DotHndling(index,prevIndex);
 
-                                        let duration = Duration;
+                                    AnimateEvent(ind,arrowid,prevIndex,dots,Duration);
 
-                                        AnimateEvent(parentElementId,arrowid,auto,clickMode,duration);
-                                       
+                                    if(initauto){
                                         auto = true;
-                                            Auto();
+                                    }
 
-                                        
-                                       
+                                    Auto();
+
                                 }
-                                
-                                
 
-                };
+                                
+                }
                 
                 ClickEvent();
                
                 
-               
-                var index = 0;
+             
 
                 // Dot Event
-                function DotHndling(dir){
+                function DotHndling(index,prevIndex){
 
                     
+                    $("#" + parentElementId + "_" +  "_dot_element").attr("disabled", true);
 
-                    var dotId = parseInt(($('#' + parentElementId +'-container ul li img:first-child')[1].id).split("_")[1]);
-                    
 
-                    
-
-                    
-                    if(dir === "right"){
-                            
-                                if(index === (picslen - 1)){
-                                    $("#" + parentElementId + "_" + (index) + "_dots_circles").css({opacity:"0.7",background:"#a9a9a9"});
+                    $("#" + parentElementId + "_" + (prevIndex) + "_dots_circles").css({opacity:"0.7",background:"#a9a9a9"});
                                 
-                                    index = 0;
+                
 
-                                    $("#" + parentElementId + "_" + (index) + "_dots_circles").css({opacity:"1",background:"black"});
-                                
-                                }
-                                else{
-
-                            
-                                    index = index + 1;
-                    
-                                $("#" + parentElementId + "_" + (index - 1) + "_dots_circles").css({opacity:"0.7",background:"#a9a9a9"});
-                                
-                                $("#" + parentElementId + "_" + (index) + "_dots_circles").css({opacity:"1",background:"black"});
-                                
-                        
-                            }
-                            
-
-                    }else if(dir === "left"){
-
-                        
-
-                        
-                        if(index === 0){
-                            $("#" + parentElementId + "_" + (index) + "_dots_circles").css({opacity:"0.7",background:"#a9a9a9"});
-                           
-                            
-                            index = picslen;
-                        
-
-                            $("#" + parentElementId + "_" + (index) + "_dots_circles").css({opacity:"1",background:"black"});
-                        
-
-                        }
-                        index = index - 1;
-
-                        $("#" + parentElementId + "_" + (index + 1) + "_dots_circles").css({opacity:"0.7",background:"#a9a9a9"});
-                                
-                        $("#" + parentElementId + "_" + (index) + "_dots_circles").css({opacity:"1",background:"black"});
-                        
-
-
-
-
-                        
-                    }
-
-                 
+                    $("#" + parentElementId + "_" + (index) + "_dots_circles").css({opacity:"1",background:"black"});
+                
 
                 }
                 
-
 
 
                 // Animate Event
-                function AnimateEvent(parentElementId,arrowId,auto,clickMode,duration){
-                    
-                   
-              
-                    var anim = {
-                                false:{ 
-                                    true:{"left":{left:- ((slideWidth/slideToshow) + (slideWidth/slideToshow))},"right":{left:0}},
-                                    false:{"left":{right: ( ((slideWidth/slideToshow) * (picslen - c)) - slideWidth) },"right":{right: ( ((slideWidth/slideToshow) * (picslen - c)) - slideWidth)}}
-                                },
-                                true:{true:{"left":{left:- ((slideWidth/slideToshow) + (slideWidth/slideToshow))},"right":{left:0}}},
-                                "reverse":{"right":(((slideWidth/slideToshow) * (picslen - c)) - slideWidth) },"right":{right: ( ((slideWidth/slideToshow) * (picslen - c)) - slideWidth)}
-                                
-
-
-                        };
-                       
-                       
-                    
-                        $('#' + parentElementId +'-container ul').animate(anim[auto][mode][arrowId],duration,function(){
-              
-                        if(mode !== true){
+                function AnimateEvent(slideindex,arrowId,prevIndex,dots=false,dur){
 
                        
+
+                        // infinite False
+                        if(infinite_State !== true){
+
+                            var anim = slidewidth * slideindex;
                             
-                        }else{
-                            
-                     
-                            
-
-                            if(arrowId  === "right"){
-
-
-                                $('#' + parentElementId +'-container ul li:last-child').prependTo('#' + parentElementId +'-container ul');
-
-                                $('#' + parentElementId +'-container ul').css('left', - (slideWidth/slideToshow) );
-
-                                $('#' + parentElementId +  "-arrow-"  + arrowId).attr("disabled", false);
-                                
-                               
-                          
-                                
-                                
-                            
-                            }else if(arrowId  === "left"){
-
-                         
-
-                                $('#' + parentElementId +'-container ul li:first-child').appendTo('#' + parentElementId +'-container ul');
-                               
-                              
-                                $('#' + parentElementId +'-container ul').css('left', - (slideWidth/slideToshow) );
-
-
-                                $('#' + parentElementId +  "-arrow-"  + arrowId).attr("disabled", false);
-                                
                            
+                    
+                        }else{
+                    
+                            // infinite true
+                            if(dots === true){
                                 
-                            }
-                                 
-                        
+                                
+                                    if(index > prevIndex){
+
+                                        anim = slidewidth * slideindex;
+                                        
+                                    }
+
+                                    
+                                    if(index < prevIndex){
+                                    
+                                        
+                                        for(let i=0;i<(prevIndex - index);i++){
+
+                                                $('#' + parentElementId +'-container ul li:last-child').prependTo('#' + parentElementId +'-container ul');
+                                                $('#' + parentElementId +'-container ul').css('right', slidewidth);
+                                        }
+
+                                        anim = 0;
+                                        
+
+                                    }
+                                
+
+                            }else{
+
+                               
+                                    
+                                    anim = slidewidth;
+
+                                    if(arrowId  === "right"){
+                                        $('#' + parentElementId +'-container ul li:last-child').prependTo('#' + parentElementId +'-container ul');
+                
+                                        
+                                        $('#' + parentElementId +'-container ul').css('right', slidewidth);
+                
+                                        anim = 0;
+                
+                
+                                    }
+                                
+                                
+
+                            }    
                         }
 
-                  
-                     if(clickMode === true){
-                       
-                    
-                     }
+                   
+                    $('#' + parentElementId +'-container ul').animate({right:anim},dur ,function(){
+              
+                        
+
+                        // enable arrows
+                        $('#' + parentElementId +  "-arrow-"  + arrowId).attr("disabled", false);
+                        $('#' + parentElementId +  "-arrow-"  + arrowId).attr("disabled", false);
+                          
+
+                            // infinite true
+                            if(infinite_State === true ){
+                                
+                                if(dots === true){
+                                   
+                                        if(index > prevIndex){
+                                            for(let i=0;i<(index-prevIndex);i++){
+                                                
+                                                $('#' + parentElementId +'-container ul li:first-child').appendTo('#' + parentElementId +'-container ul');
+                                                $('#' + parentElementId +'-container ul').css('right', 0);
+                                            }
+                                        }
+
+
+                                    
+
+                                }else{
+
+                                
+                                    
+                                        if(arrowId  === "left"){
+                                        
+                                            $('#' + parentElementId +'-container ul li:first-child').appendTo('#' + parentElementId +'-container ul');
+                                            
+
+                                        }
+                                        $('#' + parentElementId +'-container ul').css('right', 0);
+                                    
+
+                                    
+                                }
+
+                                cliclLock = true;
+                                    
+                            }
+                            
+                                
+                        
 
                     });
+
+                    
+
                 }
 
+
+
+            // Auto event    
             function Auto(){
- 
-                if(auto === true && mode === true){
+                
+                if(auto === true && infinite_State === true){
                     st[parentElementId] =   setInterval(() => {
                         
-                        AnimateEvent(parentElementId,autoDirection,auto,false,Duration);
+                        AnimateEvent(parentElementId,autoDirection,auto,false,autoDuration);
 
+                        let prevIndex = index; 
+
+                        indexHndl(autoDirection);
+
+                        DotHndling(index,prevIndex);
+
+                      
                         
-                        DotHndling(autoDirection);
-                     
-                       
-                          },5000);
-                        }
-                        
+                          },autoDelay);
+                }
                          
                 
             }
           
-            if(auto === true && mode === true){
+            if(auto === true && infinite_State === true){
 
                 Auto();
             }
+
+
+                  
+    // Resize Event
+    window.addEventListener("resize",function(e){
+       
+        var slideWidth = area[0];       
+        var slideHeight =  $('#' + parentElementId +'-container').height();
+
+        if(area === "full"){
+
+           
+                slideWidth = $('#' + parentElementId).width();
+
+                $('#' + parentElementId + '-container').css("width",$('#' + parentElementId).width());
+
+        }
+        
+        // in ZoomIn State
+        else if(slideWidth > $('#' + parentElementId).width()){
+
+         
+                slideWidth = $('#' + parentElementId).width();
+                $('#' + parentElementId + '-container').css("width",$('#' + parentElementId).width());
+
+        }else{
+             
+                // in ZoomOut State
+                slideWidth = area[0];
+                $('#' + parentElementId + '-container').css("width",area[0]);
+
+            }
+
+    
+
+        // Check Infinite State
+
+
+        $('#' + parentElementId + '-container ul').css({ width: sliderUlWidth  , right: 0 });
+    
+
+        
+
+        $('#' + parentElementId + '-container ul li').css({ width: slideWidth/ slideToshow, height: slideHeight });
+
+        $('#' + parentElementId + '-container ul li img').css({ width: slideWidth / slideToshow, height: slideHeight });
+            
+    });
           
-
-
-
-
-
 
 }
 

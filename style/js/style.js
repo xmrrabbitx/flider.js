@@ -5,8 +5,73 @@
 export function styleCss (){};
 
 // main styles
-styleCss.prototype.Css = function(optional,parentElementId){
+styleCss.prototype.Css = function(e,optional){
 
+    // main variables 
+    var parentElementId = e['id'];
+    var parentElement = document.getElementById(parentElementId);
+    var area = e['area'];
+    var container = document.getElementById(parentElementId + "-container");
+    var slideToshow = e['slideToshow'];
+    var infinite = e['infinite'];
+    var direction = e['direction'];
+
+
+    /* check for full or custom dimensions of container */
+	if (parentElement.clientHeight === 24){
+        
+        container.style.width = window.innerWidth + "px";
+        container.style.height = window.innerHeight + "px";
+
+       }else{
+        
+        if(area === "full"){
+            
+            container.style.width = "100%";
+            container.style.height = "100%";
+        }
+        else{
+          
+            if(area[0] > parentElement.clientWidth || area[1] > parentElement.clientHeight ){
+                container.style.width = "100%";
+                container.style.height = "100%";
+            }
+            else{
+            container.style.width = area[0] + "px";
+            container.style.height = area[1] + "px";
+
+            }
+        }
+
+       }
+
+
+       var slideCount = $('#' + parentElementId + '-container ul li').length;
+       var slideWidth = $('#' + parentElementId +'-container').width() ;       
+       var slideHeight = $('#' + parentElementId + '-container').height();
+           
+   
+       var sliderUlWidth = slideCount * (slideWidth / slideToshow);
+   
+       if(direction === "right"){
+
+        var r = (slideCount-1) * (slideWidth / slideToshow);
+       }else{
+           r = 0;
+       }
+   
+           // ul align position
+           $('#' + parentElementId +'-container ul').css({ width: sliderUlWidth  , float:"left", right:r});
+        
+   
+               $('#' + parentElementId +'-container li').css({ width: slideWidth/ slideToshow, height: slideHeight });
+   
+               $('#' + parentElementId +'-container li img').css({ width: slideWidth / slideToshow, height: slideHeight });
+           
+
+
+
+    // check optional css styles
     if(optional !== null){
         let optionalCss = optional['css'];
 
@@ -27,9 +92,9 @@ styleCss.prototype.Css = function(optional,parentElementId){
 
 
 // arrows styles modes
-styleCss.prototype.Arrows = function(optional,id){
+styleCss.prototype.Arrows = function(e,optional){
 
-    var parentElementId = id;
+    var parentElementId = e['id'];
     if(optional !== null){
         
             if(optional['arrows'] === false){
