@@ -4,20 +4,19 @@ function errHdl(){};
 
 /* Error Handling Empty Method */
  errHdl.prototype.empty = function(e){
+
     var parentElementId = e['id'];
 
     for(let x=0;x<Object.keys(e).length;x++){
         
         if(e[Object.keys(e)[x]] === "" || e[Object.keys(e)[x]] === undefined){
 
-        
             return true;
 
         }
     }
 
 };
-
 
 /* Error Handling Freez Method */
 errHdl.prototype.freez = function(e){
@@ -26,7 +25,6 @@ errHdl.prototype.freez = function(e){
     
     $('#' + parentElementId ).css("opacity","0.3");
     
-
     $('#' + parentElementId ).click(function(){
     
         $('#' + parentElementId + '-arrow-left').prop("disabled", true);
@@ -36,10 +34,7 @@ errHdl.prototype.freez = function(e){
 
     });
    
-
-
 }
-
 
 /* create Object of error handling */
 export var error = new errHdl();
