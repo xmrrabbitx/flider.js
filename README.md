@@ -41,7 +41,7 @@ Second, import `flider.js` as a module:
 Third, import `jquery.js`:
 
 ```html
-<script type="text/javascript" src="./fliderjs/jquery/jquery.js"></script>
+<script type="text/javascript" src="./fliderjs/jquery/jquery.min.js"></script>
 ```
 
 
