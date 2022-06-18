@@ -54,7 +54,7 @@ import {fliderjs} from "./fliderjs/flider.js";
 fliderjs({
 
         area: "full", /* container option ( string:"full" or array:[x%,y%] )  */
-        id: "flider", /* define parent element  */
+        id: "flider", /* define parent element id */
         pics: ["1.jpg","2.jpg","3.jpg","4.jpg"], /*  names of the pictures you want to put  */
         src_pics: "pics/", /*  src_pics is the path to your pictures ex: pics/  */
         slideToshow: 1,    /* numbers of slide you want to show */
