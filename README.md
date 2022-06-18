@@ -80,17 +80,17 @@ import {fliderjs} from "./fliderjs/flider.js";
 fliderjs( {
 
     area: [1000,500], /* container option ( string:"full" or array:[x%,y%] )  */
-    id: "flider", /* parent element option  */
-    pics: ["1.jpg","2.jpg","3.jpg","4.jpg"], /*  names of the pictures you want to put  */
-    src_pics: "pics/", /*  src_pics is the path to your pictures ex: pics/  */
+    id: "flider", /* parent element id  */
+    pics: ["1.jpg","2.jpg","3.jpg","4.jpg"], /*  names of the pictures you want to put as an array  */
+    src_pics: "pics/", /*  src_pics is the path to your pictures directory ex: pics/  */
     duration: 2000,  /* in milliseconds */
-    infinite: true,  /*  true or false , default is true */
+    infinite: true,  /* infinite state: true or false , default is true */
     slideToshow: 1,  /* numbers of slide you want to show */
-    auto: true,   /* true , false  */
+    auto: true,   /* auto state: true , false  */
     auto_delay: 2000, /* in milliseconds */
     auto_duration:  3000,  /* in milliseconds */
-    auto_direction: "right", /* "left" direction or "right" direction */
-    dots: true,  /* true or false for dots option */
+    auto_direction: "right", /* "left" direction or "right" direction as string*/
+    dots: true,  /* true or false */
 
     optional:{
         
@@ -98,7 +98,7 @@ fliderjs( {
     
         css:{"arrow-left":{"background":"","border-radius":"8px","margin-left":"20px","padding":"1% 1%"}, // arrow left style
             "arrow-right":{"border-radius":"8px","margin-right":"20px","padding":"1% 1%"}, // arrow right style 
-            "container":{"border-radius":"48% 52% 51% 49% / 29% 29% 71% 71% "}, // container of slider
+            "container":{"border-radius":"48% 52% 51% 49% / 29% 29% 71% 71% "}, // container of slider style
 
             }
         
