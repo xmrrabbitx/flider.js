@@ -21,13 +21,13 @@ npm install fliderjs
 
 ## Quick start
 
-First of all, include `flider_style.css` in the head of html:
+First of all, include `flider_style.css` in the head tag of html:
 
 ```html
 <link  rel="stylesheet" href="./fliderjs/style/css/flider_style.css">
 ```
 
-Second, import `flider.js` as a module:
+Second, import `flider.js` as a module in the body tag:
 
 ```html
 <script type="module">
@@ -38,7 +38,7 @@ Second, import `flider.js` as a module:
 ```
 
 
-Third, import `jquery.js`:
+Then, import `jquery.js`:
 
 ```html
 <script type="text/javascript" src="./fliderjs/jquery/jquery.min.js"></script>
