@@ -134,9 +134,15 @@ eventHndl.prototype.ClickArrow = function(){
 
         let arrowid = this.id.split("-")[2];
         
-        _self.Index(arrowid);
+        if(_self.CliclLock){
 
-        _self.ClickHndl(_self.index,prevIndex,arrowid);
+            _self.CliclLock = false;
+                
+            _self.Index(arrowid);
+
+            _self.ClickHndl(_self.index,prevIndex,arrowid);
+
+        }
 
     });
 
@@ -166,7 +172,7 @@ eventHndl.prototype.ClickHndl = function(Index,PrevIndex,arrow,DotsState){
     if(_self.auto === true){
                                     
         _self.auto = false;
-
+        
     }   
     
     _self.Stop(_self.state[_self.ParentElementId]);
@@ -272,7 +278,7 @@ eventHndl.prototype.Animate = function(slideindex,arrowId,prevIndex,dots=false,d
                     }
                                     
             }
-                            
+         console.log(_self.CliclLock);
          _self.CliclLock = true;
 
     });
@@ -288,6 +294,8 @@ eventHndl.prototype.Auto = function(){
     if(_self.auto === true && _self.infinite_State === true){
 
         _self.state[_self.ParentElementId] = setInterval(() => {
+
+            _self.CliclLock = false;
 
             _self.Animate(_self.parentElementId,_self.AutoDirection,_self.auto,false,_self.AutoDuration);
 
