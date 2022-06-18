@@ -55,10 +55,9 @@ fliderjs({
 
         area: "full", /* container option ( string:"full" or array:[x%,y%] )  */
         id: "flider", /* define parent element id */
-        pics: ["1.jpg","2.jpg","3.jpg","4.jpg"], /*  names of the pictures you want to put  */
-        src_pics: "pics/", /*  src_pics is the path to your pictures ex: pics/  */
+        pics: ["1.jpg","2.jpg","3.jpg","4.jpg"], /*  names of the pictures you want to put as an array */
+        src_pics: "pics/", /*  src_pics is the path to your pictures directory ex: pics/  */
         slideToshow: 1,    /* numbers of slide you want to show */
-
 
 });
 ```
@@ -80,7 +79,7 @@ import {fliderjs} from "./fliderjs/flider.js";
 fliderjs( {
 
     area: [1000,500], /* container option ( string:"full" or array:[x%,y%] )  */
-    id: "flider", /* parent element id  */
+    id: "flider", /* define parent element id  */
     pics: ["1.jpg","2.jpg","3.jpg","4.jpg"], /*  names of the pictures you want to put as an array  */
     src_pics: "pics/", /*  src_pics is the path to your pictures directory ex: pics/  */
     duration: 2000,  /* in milliseconds */
@@ -100,10 +99,8 @@ fliderjs( {
             "arrow-right":{"border-radius":"8px","margin-right":"20px","padding":"1% 1%"}, // arrow right style 
             "container":{"border-radius":"48% 52% 51% 49% / 29% 29% 71% 71% "}, // container of slider style
 
-            }
-        
-
-                    }
+        }
+                }
 });
 ```
 
